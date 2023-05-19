@@ -6,7 +6,7 @@ import card3 from "../assets/Rectangle 9.png";
 
 const DetailCardList = () => {
   return (
-    <div className="py-10 bg-black flex justify-center items-start ">
+    <div className="py-10 bg-black flex justify-evenly items-start px-11 md:px-22 flex-wrap">
       <FeatureCard
         cardtitle="Reserved Parking"
         cardDescription="Secure your spot in advance and avoid parking hassles."

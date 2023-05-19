@@ -3,11 +3,11 @@ import PriceCard from "./PriceCard";
 
 const Recommended = () => {
   return (
-    <div className="bg-black flex justify-center items-center flex-col py-7 px-7">
-      <h1 className="bg-[#FECB21] text-black font-poppins p-2 font-semibold text-base ">
+    <div className="bg-black flex justify-center items-center flex-col py-7 px-7 pt-10">
+      <h1 className="bg-[#FECB21] text-black font-poppins p-2 font-semibold text-base md:text-lg">
         Recommended
       </h1>
-      <div className="flex gap-2 pt-7">
+      <div className="flex flex-wrap gap-2 pt-7 justify-center items-start">
         <PriceCard
           plantitle="Free"
           plandetails="Ideal for occasional parkers"

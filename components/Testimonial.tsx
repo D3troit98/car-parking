@@ -6,7 +6,7 @@ import parkLogo from "../public/Vector.png";
 
 const Testimonial = () => {
   return (
-    <div className="bg-black text-white py-12 px-8">
+    <div className="bg-black text-white py-12 px-11 md:px-22">
       <div className="flex flex-col items-center mb-8">
         <Image
           src={parkLogo}
@@ -19,8 +19,8 @@ const Testimonial = () => {
           Testimonial
         </h1>
       </div>
-      <div className="flex mb-8">
-        <div className="w-2/3 mr-8">
+      <div className="flex mb-8 md:flex-row flex-col md:gap-0 gap-8">
+        <div className="md:w-2/3 md:mr-8 w-full">
           <div className="bg-white rounded-lg shadow-lg p-8">
             <p className="mb-4 text-[#949494] font-poppins italic text-xs">
               <FaQuoteLeft className="text-[#FECB21] inline mr-2 text-xl" />
@@ -49,7 +49,7 @@ const Testimonial = () => {
             </div>
           </div>
         </div>
-        <div className="w-1/3 flex flex-col">
+        <div className="md:w-1/3 w-full flex flex-col">
           <div className="bg-white rounded-lg shadow-lg p-4 mb-4">
             <div className="flex justify-between items-center">
               <Image

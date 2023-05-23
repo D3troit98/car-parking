@@ -1,48 +1,109 @@
-import React from 'react'
-import Image from 'next/image'
-import parkLogo from '../public/Vector.png'
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import parkLogo from "../public/Vector.png";
+import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import { useRouter } from "next/navigation";
+import { AiOutlineLogout } from "react-icons/ai";
+import useAuthStore from "@/store/authStore";
+import { createOrGetUser } from "@/utils";
+import Link from "next/link";
 const Header = () => {
+  const userProfile = useAuthStore((state: any) => state.userProfile);
+  console.log("userProfile", userProfile);
+  const addUser = useAuthStore((state: any) => state.addUser);
+  const removeUser = useAuthStore((state: any) => state.removeUser);
+  const router = useRouter();
   return (
     <div>
-      <nav className="flex md:flex-row flex-col border-b border-b-black bg-black md:px-11 py-4 justify-between items-center flex-wrap">
-        <div className="flex justify-center items-center mb-1 md:mb-0">
-          <Image
-            src={parkLogo}
-            alt="logo"
-            className="text-[#FECB21] md:mr-1"
-            width={12}
-            height={12}
-          />
-          <p className="md:block hidden ">
-            <span className="text-[#FECB21]  uppercase font-extrabold text-lg leading-4 font-poopins">
-              easy{" "}
-            </span>{" "}
-            <span className="text-[#FFFFFF] uppercase  font-extrabold text-lg leading-4 font-poopins">
-              park
-            </span>
-          </p>
+      <nav className="flex border-b border-b-black px-11 md:px-22 py-6 md:py-8 justify-between items-center flex-wrap bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000]">
+        <div className="flex justify-center items-center">
+          <Link href="/" className="flex justify-center items-center">
+            <Image
+              src={parkLogo}
+              alt="logo"
+              className="text-[#FECB21] md:mr-2 mr-1"
+              width={20}
+              height={20}
+            />
+            <p>
+              <span className="text-[#FECB21]  uppercase font-extrabold text-lg md:text-xl leading-4 font-poopins">
+                easy{" "}
+              </span>{" "}
+              <span className="text-[#FFFFFF] uppercase  font-extrabold text-lg md:text-xl leading-4 font-poopins">
+                park
+              </span>
+            </p>
+          </Link>
         </div>
 
-        <div className="flex md:flex-row flex-col justify-evenly items-center gap-4 ">
-          <p className="text-[#FECB21] border-b-2 border-[#FECB21] font-poopins font-bold text-sm leading-4">
+        <div className="flex justify-center items-center md:gap-6 gap-3 flex-wrap ">
+          <a
+            href="/"
+            className="text-[#FFFFFF] hover:text-[#FECB21] hover:border-b-2 hover:border-[#FECB21] font-poopins font-bold text-sm md:text-base leading-4 cursor-pointer transition-colors duration-300"
+          >
             Home
-          </p>
-          <p className="text-[#FFFFFF]  font-poopins  text-sm leading-4">
+          </a>
+
+          <a
+            href="#aboutus"
+            className="text-[#FFFFFF] hover:text-[#FECB21] hover:border-b-2 hover:border-[#FECB21]  font-poopins  text-sm md:text-base leading-4 cursor-pointer transition-colors duration-300"
+          >
             About us
-          </p>
-          <p className="text-[#FFFFFF]  font-poopins  text-sm leading-4">
+          </a>
+          <a
+            href="#plan"
+            className="text-[#FFFFFF] hover:text-[#FECB21] hover:border-b-2 hover:border-[#FECB21]  font-poopins  text-sm  md:text-base leading-4 cursor-pointer transition-colors duration-300"
+          >
             Plan
-          </p>
-          <p className="text-[#FFFFFF]  font-poopins  text-sm leading-4">
+          </a>
+          <a
+            href="#testimonials"
+            className="text-[#FFFFFF] hover:text-[#FECB21] hover:border-b-2 hover:border-[#FECB21]  font-poopins  text-sm leading-4 md:text-base cursor-pointer transition-colors duration-300"
+          >
             Testimonials
-          </p>
-          <button className="bg-[#FECB21] flex justify-center items-center py-2 px-3 font-poopins text-black font-bold text-sm">
-            Login
-          </button>
+          </a>
+          <div>
+            <div>
+              {userProfile ? (
+                <div className="flex items-center gap-5 md:gap-10 ">
+                  {userProfile?.image && (
+                    <>
+                      <Link href="/dashboard">
+                        <Image
+                          width={40}
+                          height={40}
+                          className="rounded-full w-auto h-auto cursor-pointer"
+                          src={userProfile.image}
+                          alt="profile photo"
+                          priority
+                        />
+                      </Link>
+                    </>
+                  )}
+                  <button
+                    type="button"
+                    className="bg-[#FECB21] flex justify-center items-center py-2 px-3 md:px:5 font-poopins text-black font-bold text-sm md:text-base"
+                    onClick={() => {
+                      googleLogout();
+                      removeUser();
+                    }}
+                  >
+                    <AiOutlineLogout color="red" fontSize={21} />
+                  </button>
+                </div>
+              ) : (
+                <GoogleLogin
+                  onSuccess={(response) => createOrGetUser(response, addUser)}
+                  onError={() => console.log("Error")}
+                />
+              )}
+            </div>
+          </div>
         </div>
       </nav>
     </div>
   );
-}
+};
 
-export default Header
+export default Header;

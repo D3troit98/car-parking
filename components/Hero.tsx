@@ -10,48 +10,11 @@ const Hero = () => {
         <Image
           src={heroImage}
           alt="Hero Image"
-          className="object-cover   h-full w-full"
+          className="object-cover h-full w-full"
         />
       </div>
 
       <div className="relative  bg-gradient-to-b  from-black to-transparent ">
-        <nav className="flex border-b border-b-black px-11 md:px-22 py-8 md:py-10 justify-between items-center flex-wrap">
-          <div className="flex justify-center items-center">
-            <Image
-              src={parkLogo}
-              alt="logo"
-              className="text-[#FECB21] md:mr-2 mr-1"
-              width={12}
-              height={12}
-            />
-            <p>
-              <span className="text-[#FECB21]  uppercase font-extrabold text-lg md:text-xl leading-4 font-poopins">
-                easy{" "}
-              </span>{" "}
-              <span className="text-[#FFFFFF] uppercase  font-extrabold text-lg md:text-xl leading-4 font-poopins">
-                park
-              </span>
-            </p>
-          </div>
-
-          <div className="flex justify-center items-center md:gap-6 gap-3 flex-wrap ">
-            <p className="text-[#FECB21] border-b-2 border-[#FECB21] font-poopins font-bold text-sm md:text-base leading-4">
-              Home
-            </p>
-            <p className="text-[#FFFFFF]  font-poopins  text-sm md:text-base leading-4">
-              About us
-            </p>
-            <p className="text-[#FFFFFF]  font-poopins  text-sm  md:text-base leading-4">
-              Plan
-            </p>
-            <p className="text-[#FFFFFF]  font-poopins  text-sm leading-4 md:text-base">
-              Testimonials
-            </p>
-            <button className="bg-[#FECB21] flex justify-center items-center py-2 px-3 md:px:5 font-poopins text-black font-bold text-sm md:text-base">
-              Login
-            </button>
-          </div>
-        </nav>
         <div className="text-white pt-20 md:pt-24 flex flex-col justify-center items-center px-11 md:px-22">
           <div className="flex flex-col">
             <p className="text-base md:text-lg font-medium leading-4 mb-1">
@@ -65,7 +28,7 @@ const Hero = () => {
                 park
               </span>
             </p>
-            <p className="w-[600px] md:w-[700px] text-base mt-2 py-4">
+            <p className="md:w-96 text-base mt-2 py-4">
               Easy Park is your reliable car parking reservation ticketing app.
               Say goodbye to the hassle of searching for parking spots. With
               Easy Park, you can easily find and reserve a parking space in

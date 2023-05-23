@@ -1,3 +1,4 @@
+"use client";
 import AboutUs from "@/components/AboutUs";
 import DetailCardList from "@/components/DetailCardList";
 import Hero from "@/components/Hero";

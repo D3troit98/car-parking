@@ -13,7 +13,7 @@ const BookNow = () => {
         </p>
       </div>
       <Link
-        href="/booking"
+        href="dashboard/booking"
         className="flex items-center space-x-2 text-white bg-black rounded-lg px-4 py-2 transition duration-300 ease-in-out transform hover:scale-105 font-poopins"
       >
         <span>Book</span>

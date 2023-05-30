@@ -1,0 +1,46 @@
+[{
+  "_id": {
+    "$oid": "646f6f477d11a71e09a7dc14"
+  },
+  "name": "South Bank Parklands Parking",
+  "available": true,
+  "image": "https://images.unsplash.com/photo-1617886322207-6f504e7472c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+  "location": "South Bank, Brisbane, Queensland",
+  "price": 10.99
+},{
+  "_id": {
+    "$oid": "646f6f477d11a71e09a7dc15"
+  },
+  "name": "Elizabeth Quay Parking",
+  "available": false,
+  "image": "https://images.unsplash.com/photo-1596982093901-eb285922c89f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80",
+  "location": "The Esplanade, Perth, Western Australia",
+  "price": 11.99
+},{
+  "_id": {
+    "$oid": "646f6f477d11a71e09a7dc16"
+  },
+  "name": "B1",
+  "available": true,
+  "image": "https://images.unsplash.com/photo-1610900387896-afc3b9e1a6c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1936&q=80",
+  "location": "Street 3, City",
+  "price": 12.99
+},{
+  "_id": {
+    "$oid": "646f6f477d11a71e09a7dc17"
+  },
+  "name": " Sydney Opera House Parking",
+  "available": true,
+  "image": "https://images.unsplash.com/photo-1530276371031-2511efff9d5a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80",
+  "location": "Bennelong Point, Sydney, New South Wales",
+  "price": 15.99
+},{
+  "_id": {
+    "$oid": "646f71d37d11a71e09a7dc18"
+  },
+  "name": " Federation Square Parking",
+  "available": true,
+  "image": "https://images.unsplash.com/photo-1665952631649-f19ab8257a83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80",
+  "location": "Corner of Flinders and Swanston Streets, Melbourne, Victoria",
+  "price": 12.99
+}]

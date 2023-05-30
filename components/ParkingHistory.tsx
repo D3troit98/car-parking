@@ -56,11 +56,9 @@ const ParkingHistory = () => {
         </button>
         <div className="flex items-center px-3 text-gray-600">
           <p className="mr-2">Page</p>
-          <input
-            type="text"
-            className="w-10 text-center border border-gray-300 rounded-md"
-            value="1"
-          />
+          <p className="w-10 text-center border bg-white border-gray-300 rounded-md">
+            1
+          </p>
         </div>
         <button className="flex items-center px-4 py-2 bg-yellow-500 text-white font-semibold rounded-md ml-2">
           <FaChevronRight className="ml-1" />

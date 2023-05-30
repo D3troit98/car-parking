@@ -33,7 +33,7 @@ const Testimonial = () => {
               <Image
                 src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80"
                 alt="profile photo"
-                className="rounded-full mr-4"
+                className="rounded-full mr-4 w-auto h-auto"
                 width={40}
                 height={40}
               />
@@ -55,7 +55,7 @@ const Testimonial = () => {
               <Image
                 src="https://plus.unsplash.com/premium_photo-1671581559476-10b8a92ffb77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
                 alt="profile photo"
-                className="rounded-full mb-2"
+                className="rounded-full mb-2 w-auto h-auto"
                 width={40}
                 height={40}
               />
@@ -74,7 +74,7 @@ const Testimonial = () => {
               <Image
                 src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
                 alt="profile photo"
-                className="rounded-full mb-2"
+                className="rounded-full mb-2 w-auto h-auto"
                 width={40}
                 height={40}
               />
@@ -95,7 +95,7 @@ const Testimonial = () => {
               <Image
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80"
                 alt="profile photo"
-                className="rounded-full mb-2"
+                className="rounded-full mb-2 w-auto h-auto"
                 width={40}
                 height={40}
               />

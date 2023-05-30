@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import parkLogo from "../public/Vector.png";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
@@ -8,12 +8,17 @@ import { AiOutlineLogout } from "react-icons/ai";
 import useAuthStore from "@/store/authStore";
 import { createOrGetUser } from "@/utils";
 import Link from "next/link";
+import { IUser } from "@/types";
 const Header = () => {
-  const userProfile = useAuthStore((state: any) => state.userProfile);
-  console.log("userProfile", userProfile);
+  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
+
   const addUser = useAuthStore((state: any) => state.addUser);
   const removeUser = useAuthStore((state: any) => state.removeUser);
   const router = useRouter();
+  const [userUser, setUserUser] = useState<IUser | null>(null);
+  useEffect(() => {
+    setUserUser(userProfile);
+  }, [userProfile]);
   return (
     <div>
       <nav className="flex border-b border-b-black px-11 md:px-22 py-6 md:py-8 justify-between items-center flex-wrap bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000]">
@@ -64,41 +69,39 @@ const Header = () => {
             Testimonials
           </a>
           <div>
-            <div>
-              {userProfile ? (
-                <div className="flex items-center gap-5 md:gap-10 ">
-                  {userProfile?.image && (
+            {userUser ? (
+              <div className="flex items-center gap-5 md:gap-10 ">
+                {userUser?.image && (
+                  <Link href="/dashboard">
                     <>
-                      <Link href="/dashboard">
-                        <Image
-                          width={40}
-                          height={40}
-                          className="rounded-full w-auto h-auto cursor-pointer"
-                          src={userProfile.image}
-                          alt="profile photo"
-                          priority
-                        />
-                      </Link>
+                      <Image
+                        width={40}
+                        height={40}
+                        className="rounded-full w-auto h-auto cursor-pointer"
+                        src={userUser.image}
+                        alt="profile photo"
+                        priority
+                      />
                     </>
-                  )}
-                  <button
-                    type="button"
-                    className="bg-[#FECB21] flex justify-center items-center py-2 px-3 md:px:5 font-poopins text-black font-bold text-sm md:text-base"
-                    onClick={() => {
-                      googleLogout();
-                      removeUser();
-                    }}
-                  >
-                    <AiOutlineLogout color="red" fontSize={21} />
-                  </button>
-                </div>
-              ) : (
-                <GoogleLogin
-                  onSuccess={(response) => createOrGetUser(response, addUser)}
-                  onError={() => console.log("Error")}
-                />
-              )}
-            </div>
+                  </Link>
+                )}
+                <button
+                  type="button"
+                  className="bg-[#FECB21] flex justify-center items-center py-2 px-3 md:px:5 font-poopins text-black font-bold text-sm md:text-base"
+                  onClick={() => {
+                    googleLogout();
+                    removeUser();
+                  }}
+                >
+                  <AiOutlineLogout color="red" fontSize={21} />
+                </button>
+              </div>
+            ) : (
+              <GoogleLogin
+                onSuccess={(response) => createOrGetUser(response, addUser)}
+                onError={() => console.log("Error")}
+              />
+            )}
           </div>
         </div>
       </nav>

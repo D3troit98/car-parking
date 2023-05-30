@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiCar } from "react-icons/bi";
 import Image from "next/image";
 import {
@@ -7,42 +7,107 @@ import {
   BsCalendar,
   BsClock,
   BsInfoCircle,
-  BsFillPersonFill,
 } from "react-icons/bs";
 import BookingSide from "../assets/bookingside.jpg";
-
+import axios from "axios";
+import { StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
-
-const BookingPage = () => {
+import { IParkingSpot } from "@/types";
+import { NextPage } from "next";
+import { IUser } from "@/types";
+import { toast } from "react-toastify";
+import useAuthStore from "@/store/authStore";
+const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
+  parkingSpots,
+}) => {
   const [selectedSpot, setSelectedSpot] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkInTime, setCheckInTime] = useState("");
-  const [vehicleDetails, setVehicleDetails] = useState({
-    licensePlate: "",
-    make: "",
-    model: "",
-    color: "",
-  });
-  const [contactInfo, setContactInfo] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
+  const [parkingId, setParkingId] = useState("");
+  const [vehicleDetails, setVehicleDetails] = useState("");
+  const [parkingSpotImg, setParkingSpotImg] = useState<
+    StaticImageData | string
+  >(BookingSide);
+
   const [isBookingInProgress, setIsBookingInProgress] = useState(false);
   const router = useRouter();
-
-  const handleBooking = (e: React.FormEvent) => {
+  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
+  const setBookingData = useAuthStore((state: any) => state.setBookingData);
+  console.log(userProfile);
+  useEffect(() => {
+    if (selectedSpot) {
+      const selectedParkingSpot = parkingSpots.find(
+        (spot) => spot.name === selectedSpot
+      );
+      if (selectedParkingSpot) {
+        setParkingSpotImg(selectedParkingSpot.image);
+        setParkingId(selectedParkingSpot._id);
+      } else {
+        setParkingSpotImg(BookingSide);
+        setParkingId("");
+      }
+    } else {
+      setParkingSpotImg(BookingSide);
+      setParkingId("");
+    }
+  }, [selectedSpot, parkingSpots]);
+  const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Perform booking validation and API call here
     // Simulating a booking request
     setIsBookingInProgress(true);
 
-    setTimeout(() => {
-      // Simulating successful booking
+    try {
+      const bookingData = {
+        parkingId,
+        selectedSpot,
+        checkInDate,
+        checkInTime,
+        vehicleDetails,
+        email: userProfile.email,
+        userName: userProfile.userName,
+      };
+      const response = await axios.post("/api/bookings", bookingData);
+      // Check if the booking was successful
+      console.log(response);
+      if (response.status === 200) {
+        // Simulating successful booking
+        setBookingData(response.data);
+        setIsBookingInProgress(false);
+        
+        router.push("/success"); // Redirect to the success page
+      } else {
+        // Handle booking failure
+        // Show an error message or take appropriate action
+        console.log(response.data.message);
+        toast.error(response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setIsBookingInProgress(false);
+      }
+    } catch (error) {
+      // Handle booking failure
+      // Show an error message or take appropriate action
       setIsBookingInProgress(false);
-      router.push("/success"); // Redirect to the success page
-    }, 2000);
+      toast.error("An error occurred during booking. Please try again.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      }); // Display a generic error message using toast notification
+    }
   };
 
   return (
@@ -71,10 +136,11 @@ const BookingPage = () => {
               required
             >
               <option value="">-- Select Spot --</option>
-              <option value="A1">A1</option>
-              <option value="A2">A2</option>
-              <option value="B1">B1</option>
-              <option value="B2">B2</option>
+              {parkingSpots?.map((parkingSpot) => (
+                <option key={parkingSpot._id} value={parkingSpot.name}>
+                  {parkingSpot.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex items-center mb-4">
@@ -123,38 +189,12 @@ const BookingPage = () => {
               type="text"
               id="licensePlate"
               className="ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none"
-              value={vehicleDetails.licensePlate}
-              onChange={(e) =>
-                setVehicleDetails((prevState) => ({
-                  ...prevState,
-                  licensePlate: e.target.value,
-                }))
-              }
+              value={vehicleDetails}
+              onChange={(e) => setVehicleDetails(e.target.value)}
               required
             />
           </div>
-          <div className="flex items-center mb-4">
-            <BsFillPersonFill className="text-3xl text-white mr-2" />
-            <label
-              htmlFor="email"
-              className="font-poppins font-bold text-white"
-            >
-              Email:
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="ml-2 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none"
-              value={contactInfo.email}
-              onChange={(e) =>
-                setContactInfo((prevState) => ({
-                  ...prevState,
-                  email: e.target.value,
-                }))
-              }
-              required
-            />
-          </div>
+
           {/* Add more input fields for vehicle details and contact information as needed */}
 
           <button
@@ -168,16 +208,20 @@ const BookingPage = () => {
             <BsArrowRight className="text-xl" />
           </button>
         </form>
-        <div className="w-full md:w-1/3">
+        <div className="w-full md:w-1/3 border border-gray-600">
           <Image
-            src={BookingSide}
+            src={parkingSpotImg}
             alt="bookingSide"
             className="object-cover w-full md:h-80 h-auto rounded"
+            width={500}
+            height={500}
           />
         </div>
       </div>
     </div>
   );
 };
+
+
 
 export default BookingPage;

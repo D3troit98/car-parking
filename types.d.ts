@@ -16,3 +16,23 @@ export interface IUser {
   createdAt: number;
   updatedAt: number;
 }
+
+
+export interface IParkingHistoryData {
+  _id: string;
+  checkInDate: string;
+  checkInTime: string;
+  licensePlate: string;
+  email: string;
+  checkedoff: boolean;
+  parkingSpot: {
+    available: boolean;
+    image: string;
+    location: string;
+    name: string;
+    price: number;
+    updatedAt: string;
+    _id: string;
+  };
+  userName: string;
+}

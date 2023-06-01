@@ -12,7 +12,7 @@ import moment from "moment";
 
 const SuccessPage = () => {
   const bookingData = useAuthStore((state: any) => state.bookingData);
-  console.log(bookingData);
+
 
   return (
     <div className="py-6 md:px-6 px-3 bg-black flex flex-col items-center justify-center">

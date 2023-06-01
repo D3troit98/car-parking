@@ -7,7 +7,7 @@ import { IParkingSpot } from "@/types";
 async function getParkingSpots() {
   try {
     const { data } = await axios.get(`${BASE_URL}/api/parking-spots`);
-    // console.log("data", data);
+
     return data.parkingSpots;
   } catch (error) {
     // This will activate the closest `error.js` Error Boundary

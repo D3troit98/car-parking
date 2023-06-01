@@ -16,15 +16,12 @@ export async function GET() {
 
 export async function POST(request: Request) {
   const res = await request.json();
-  console.log(res);
-
-  // await usersRepo.create(res);
   const { _id } = res;
   // Connect database
   await db.connectDB();
 
   const existingUser = await User.findOne({ _id });
-  console.log("gotten here");
+
   if (existingUser) {
     console.log("user exist", existingUser);
   } else {

@@ -1,25 +1,37 @@
-import React from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
+"use client";
+import React, { useEffect, useState } from "react";
+import { FaChevronLeft, FaChevronRight, FaSadTear } from "react-icons/fa";
+import useAuthStore from "@/store/authStore";
+import { BASE_URL } from "@/utils";
+import axios from "axios";
+import moment from "moment";
+import Link from "next/link";
+import { IUser } from "@/types";
+import { IParkingHistoryData } from "@/types";
 const ParkingHistory = () => {
-  const parkingHistoryData = [
-    {
-      date: "2023-05-01",
-      location: "Parking Lot A",
-      duration: "2 hours",
-      cost: "$10.00",
-    },
-    {
-      date: "2023-04-27",
-      location: "Parking Garage B",
-      duration: "4 hours",
-      cost: "$15.00",
-    },
-    // Add more parking history data here...
-  ];
+  const [parkingHistoryData, setParkingHistoryData] = useState<
+    IParkingHistoryData[] | []
+  >();
+  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
+
+  useEffect(() => {
+    async function getParkingHistory() {
+      try {
+        const { data } = await axios.get(
+          `${BASE_URL}/api/parking-history/${userProfile.email}`
+        );
+        setParkingHistoryData(data.parkingHistories);
+      } catch (error) {
+        console.log(error);
+        throw new Error("Failed to fetch data");
+      }
+    }
+
+    if (userProfile) getParkingHistory();
+  }, [userProfile]);
 
   return (
-    <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000]  rounded-lg p-6 shadow-md">
+    <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] rounded-lg p-6 shadow-md">
       <h2 className="text-2xl font-bold mb-4 font-poopins">Parking History</h2>
       <div className="overflow-x-auto">
         <table className="w-full table-auto">
@@ -32,21 +44,55 @@ const ParkingHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {parkingHistoryData.map((parking, index) => (
-              <tr
-                key={index}
-                className={
-                  index % 2 === 0
-                    ? "bg-gray-100 hover:bg-gray-300 font-poopins text-black border-b border-gray-400"
-                    : "bg-gray-100 hover:bg-gray-300 font-poopins text-black border-b border-gray-400"
-                }
-              >
-                <td className="px-4 py-2">{parking.date}</td>
-                <td className="px-4 py-2">{parking.location}</td>
-                <td className="px-4 py-2">{parking.duration}</td>
-                <td className="px-4 py-2">{parking.cost}</td>
+            {parkingHistoryData?.length ? (
+              parkingHistoryData.map((parking, index) => (
+                <tr
+                  key={index}
+                  className={
+                    index % 2 === 0
+                      ? "bg-gray-100 hover:bg-gray-300 font-poopins text-black border-b border-gray-400"
+                      : "bg-gray-100 hover:bg-gray-300 font-poopins text-black border-b border-gray-400"
+                  }
+                >
+                  <td className="px-4 py-2">
+                    <Link href={`/parking-detail/${parking._id}`}>
+                      {moment(parking.checkInDate).format("MMMM DD, YYYY")}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-2">
+                    <Link href={`/parking-detail/${parking._id}`}>
+                      {parking.parkingSpot.location}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-2">
+                    <Link href={`/parking-detail/${parking._id}`}>
+                      {moment(parking.checkInTime, "HH:mm").format("hh:mm A")}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-2">
+                    <Link href={`/parking-detail/${parking._id}`}>
+                      {parking.parkingSpot.price}
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={4} className="text-center">
+                  {/* Display a message or React icons here */}
+                  {/* Example with React icons */}
+                  <div className="flex items-center justify-center">
+                    <p className="text-gray-500">
+                      No parking history available.
+                    </p>
+                    <span className="ml-2">
+                      {/* Replace with your desired React icons */}
+                      <FaSadTear className="text-gray-500" />
+                    </span>
+                  </div>
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

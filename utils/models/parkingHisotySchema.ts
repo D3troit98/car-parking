@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const ParkingHistorySchema = new mongoose.Schema({
   parkingSpot: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ParkingSpot",
+    ref: "parkingSpot",
     required: true,
   },
   checkInDate: { type: Date, required: true },
@@ -11,6 +11,7 @@ const ParkingHistorySchema = new mongoose.Schema({
   licensePlate: { type: String, required: true },
   email: { type: String, required: true },
   userName: { type: String, required: true },
+  checkedoff: { type: Boolean, default: false },
 });
 
 const ParkingHistory =

@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 import db from "@/utils/dbConnection";
 import ParkingSpot from "@/utils/models/parkingSpotSchema";
 import ParkingHistory from "@/utils/models/parkingHisotySchema";
-import useAuthStore from "@/store/authStore";
+
 
 export async function POST(request: Request) {
   try {
     const res = await request.json();
-    console.log("requesting body", res);
+
     const {
       parkingId,
       selectedSpot,
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
       email,
       userName,
     });
-    console.log(parkingHistory);
+
     // Save the parking history record
     await parkingHistory.save();
 

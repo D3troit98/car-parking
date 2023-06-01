@@ -15,7 +15,6 @@ const useAuthStore = create(
       },
       bookingData: null,
       setBookingData: (data: any) => {
-        console.log("data", data);
         set({ bookingData: data });
       },
     }),

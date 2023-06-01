@@ -51,19 +51,19 @@ const Header = () => {
           </a>
 
           <a
-            href="#aboutus"
+            href="/#aboutus"
             className="text-[#FFFFFF] hover:text-[#FECB21] hover:border-b-2 hover:border-[#FECB21]  font-poopins  text-sm md:text-base leading-4 cursor-pointer transition-colors duration-300"
           >
             About us
           </a>
           <a
-            href="#plan"
+            href="/#plan"
             className="text-[#FFFFFF] hover:text-[#FECB21] hover:border-b-2 hover:border-[#FECB21]  font-poopins  text-sm  md:text-base leading-4 cursor-pointer transition-colors duration-300"
           >
             Plan
           </a>
           <a
-            href="#testimonials"
+            href="/#testimonials"
             className="text-[#FFFFFF] hover:text-[#FECB21] hover:border-b-2 hover:border-[#FECB21]  font-poopins  text-sm leading-4 md:text-base cursor-pointer transition-colors duration-300"
           >
             Testimonials

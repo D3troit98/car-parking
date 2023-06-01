@@ -24,9 +24,9 @@ const Testimonial = () => {
           <div className="bg-white rounded-lg shadow-lg p-8">
             <p className="mb-4 text-[#949494] font-poppins italic text-xs">
               <FaQuoteLeft className="text-[#FECB21] inline mr-2 text-xl" />
-              "Easy Park is the best car parking reservation ticketing app I
-              have ever used. It has made parking hassle-free and convenient for
-              me. Highly recommended!"
+              &ldquo;Easy Park is the best car parking reservation ticketing app
+              I have ever used. It has made parking hassle-free and convenient
+              for me. Highly recommended!&rdquo;
             </p>
             <hr className="border-[#FECB21]" />
             <div className="flex items-center mt-4">

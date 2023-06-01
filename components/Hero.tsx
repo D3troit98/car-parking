@@ -65,9 +65,9 @@ const Hero = () => {
               Easy Park is your reliable car parking reservation ticketing app.
               Say goodbye to the hassle of searching for parking spots. With
               Easy Park, you can easily find and reserve a parking space in
-              advance, ensuring a stress-free parking experience. Whether you're
-              running errands, going to work, or planning a day out, Easy Park
-              has got you covered.
+              advance, ensuring a stress-free parking experience. Whether
+              you&apos;re running errands, going to work, or planning a day out,
+              Easy Park has got you covered.
             </p>
           </div>
 

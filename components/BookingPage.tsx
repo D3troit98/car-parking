@@ -8,6 +8,7 @@ import {
   BsClock,
   BsInfoCircle,
 } from "react-icons/bs";
+import { FaExclamationCircle } from "react-icons/fa";
 import BookingSide from "../assets/bookingside.jpg";
 import axios from "axios";
 import { StaticImageData } from "next/image";
@@ -16,6 +17,7 @@ import { IParkingSpot } from "@/types";
 import { NextPage } from "next";
 import { IUser } from "@/types";
 import { toast } from "react-toastify";
+import Loading from "./Loading";
 import useAuthStore from "@/store/authStore";
 const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
   parkingSpots,
@@ -75,7 +77,7 @@ const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
         // Simulating successful booking
         setBookingData(response.data);
         setIsBookingInProgress(false);
-        
+
         router.push("/success"); // Redirect to the success page
       } else {
         // Handle booking failure
@@ -109,7 +111,21 @@ const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
       }); // Display a generic error message using toast notification
     }
   };
-
+  if (parkingSpots?.length < 1) {
+    return (
+      <div className="flex items-center justify-center h-screen bg-white">
+        <div className="bg-gray-200 p-6 rounded-lg shadow-lg text-center">
+          <FaExclamationCircle className="text-[#FECB21] text-5xl mb-4" />
+          <p className="text-gray-800 text-lg font-semibold mb-2">
+            All parking spots have been taken.
+          </p>
+          <p className="text-gray-600">
+            Please try again later or check back for availability.
+          </p>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="bg-gradient-to-br from-[#171717] to-[#000000]  shadow-lg p-6">
       <h2 className="text-2xl font-bold text-white font-poppins mb-4 text-center">

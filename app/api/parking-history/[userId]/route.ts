@@ -34,6 +34,12 @@ export async function PUT(request: Request, context: any) {
       { checkedoff: body.checkedoff },
       { new: true }
     );
+    // Find the parking spot by its ID and update the availability
+    const updatedParkingSpot = await ParkingSpot.findByIdAndUpdate(
+      updatedParkingHistory.parkingSpot,
+      { available: true },
+      { new: true }
+    );
     return NextResponse.json({ updatedParkingHistory });
   } catch (error) {
     console.log(error);

@@ -6,7 +6,7 @@ import { IParkingSpot } from "@/types";
 
 async function getParkingSpots() {
   try {
-    const { data } = await axios.get(`${BASE_URL}/api/parking-spots`);
+    const { data } = await axios.get(`api/parking-spots`);
 
     return data.parkingSpots;
   } catch (error) {

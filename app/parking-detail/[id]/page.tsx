@@ -35,7 +35,7 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
       }
     };
     getParkingData();
-  }, [params]);
+  }, [params, id]);
 
   const handleCheckOff = async () => {
     try {

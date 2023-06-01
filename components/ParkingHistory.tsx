@@ -1,6 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight, FaSadTear } from "react-icons/fa";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaSadTear,
+  FaCheck,
+  FaTimes,
+} from "react-icons/fa";
 import useAuthStore from "@/store/authStore";
 import { BASE_URL } from "@/utils";
 import axios from "axios";
@@ -8,12 +14,13 @@ import moment from "moment";
 import Link from "next/link";
 import { IUser } from "@/types";
 import { IParkingHistoryData } from "@/types";
+import Loading from "./Loading";
 const ParkingHistory = () => {
   const [parkingHistoryData, setParkingHistoryData] = useState<
     IParkingHistoryData[] | []
   >();
+  const [loading, setLoading] = useState(true);
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-
   useEffect(() => {
     async function getParkingHistory() {
       try {
@@ -27,9 +34,15 @@ const ParkingHistory = () => {
       }
     }
 
-    if (userProfile) getParkingHistory();
+    if (userProfile) {
+      setLoading(true);
+      getParkingHistory();
+    }
+    setLoading(false);
   }, [userProfile]);
-
+  if (loading) {
+    return <Loading />; // or any loading state you prefer
+  }
   return (
     <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] rounded-lg p-6 shadow-md">
       <h2 className="text-2xl font-bold mb-4 font-poopins">Parking History</h2>
@@ -38,9 +51,9 @@ const ParkingHistory = () => {
           <thead>
             <tr className="bg-gray-200 text-gray-600 font-poopins">
               <th className="px-4 py-2 rounded-tl-lg">Date</th>
-              <th className="px-4 py-2">Location</th>
-              <th className="px-4 py-2">Duration</th>
-              <th className="px-4 py-2 rounded-tr-lg">Cost</th>
+              <th className="px-4 py-2">Name</th>
+              <th className="px-4 py-2">Check in Time</th>
+              <th className="px-4 py-2 rounded-tr-lg">CheckedOff</th>
             </tr>
           </thead>
           <tbody>
@@ -61,17 +74,21 @@ const ParkingHistory = () => {
                   </td>
                   <td className="px-4 py-2">
                     <Link href={`/parking-detail/${parking._id}`}>
-                      {parking.parkingSpot.location}
+                      {parking.parkingSpot.name}
                     </Link>
                   </td>
                   <td className="px-4 py-2">
                     <Link href={`/parking-detail/${parking._id}`}>
-                      {moment(parking.checkInTime, "HH:mm").format("hh:mm A")}
+                      {parking.checkInTime}
                     </Link>
                   </td>
                   <td className="px-4 py-2">
                     <Link href={`/parking-detail/${parking._id}`}>
-                      {parking.parkingSpot.price}
+                      {parking.checkedoff ? (
+                        <FaCheck className="text-green-500" />
+                      ) : (
+                        <FaTimes className="text-red-500" />
+                      )}
                     </Link>
                   </td>
                 </tr>
@@ -79,14 +96,11 @@ const ParkingHistory = () => {
             ) : (
               <tr>
                 <td colSpan={4} className="text-center">
-                  {/* Display a message or React icons here */}
-                  {/* Example with React icons */}
                   <div className="flex items-center justify-center">
                     <p className="text-gray-500">
                       No parking history available.
                     </p>
                     <span className="ml-2">
-                      {/* Replace with your desired React icons */}
                       <FaSadTear className="text-gray-500" />
                     </span>
                   </div>

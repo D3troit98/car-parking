@@ -23,7 +23,6 @@
     "moment": "^2.29.4",
     "mongoose": "^6.5.0",
     "next": "13.4.2",
-    "qrcode.react": "^3.1.0",
     "react": "18.2.0",
     "react-confetti": "^6.1.0",
     "react-dom": "18.2.0",

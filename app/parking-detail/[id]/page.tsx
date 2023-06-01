@@ -10,16 +10,17 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { BASE_URL } from "@/utils";
 import Loading from "@/components/Loading";
 import moment from "moment";
-import QRCode from "qrcode.react";
+
 
 const ParkingDetail = ({ params }: { params: { id: string } }) => {
   const [parkingData, setParkingData] = useState<IParkingHistoryData>();
   const [checkedOff, setCheckedOff] = useState(parkingData?.checkedoff);
-  const userProfile = useAuthStore((state: any) => state.userProfile);
+  const [isLoading, setIsLoading] = useState(false);
+
   const pathname = usePathname();
   const id = pathname.match(/\/parking-detail\/(\w+)/)?.[1];
-  const printRef = useRef<HTMLDivElement>(null);
 
+  console.log(parkingData);
   useEffect(() => {
     const getParkingData = async () => {
       try {
@@ -27,6 +28,7 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
           `${BASE_URL}/api/parking-detail/${id}`
         );
         setParkingData(data.parkingHistory);
+        setCheckedOff(data.parkingHistory.checkedoff);
       } catch (error) {
         console.log(error);
         throw new Error("Failed to fetch data");
@@ -35,9 +37,26 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
     getParkingData();
   }, [params]);
 
-  const handleCheckOff = () => {
-    // Perform check-off logic here
-    setCheckedOff(true);
+  const handleCheckOff = async () => {
+    try {
+      setIsLoading(true); // Set loading state to true before sending the request
+      const response = await axios.put(
+        `/api/parking-history/${parkingData?._id}`,
+        {
+          checkedoff: true,
+        }
+      );
+      setParkingData((prevS: any) => ({
+        ...prevS,
+        checkedoff: response.data?.updatedParkingHistory?.checkedoff,
+      }));
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false); // Set loading state back to false after the request is complete
+      setCheckedOff(true);
+    }
   };
 
   const handlePrint = () => {
@@ -137,13 +156,23 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
     <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] text-white p-6 shadow-md">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-6">
         <h2 className="text-2xl font-bold font-poopins">Parking Detail</h2>
-        {!checkedOff && (
+        {checkedOff ? (
+          <div className="flex items-center">
+            <FaCheck className="text-green-500" />
+            <span>Checked Off</span>
+          </div>
+        ) : (
           <button
             className="bg-[#FECB21] text-black px-4 py-2 rounded-md font-poopins flex items-center space-x-1"
             onClick={handleCheckOff}
+            disabled={isLoading} // Disable the button when loading is true
           >
-            <FaCheck />
-            <span>Check Off</span>
+            {isLoading ? ( // Display loading indicator or check icon based on the loading state
+              <></> // Replace with your loading component or spinner
+            ) : (
+              <FaCheck />
+            )}
+            <span>{isLoading ? "Checking Off..." : "Check Off"}</span>
           </button>
         )}
       </div>

@@ -6,13 +6,15 @@ import { BiCheckCircle } from "react-icons/bi";
 import { FiArrowLeft } from "react-icons/fi";
 import Confetti from "react-confetti";
 import QRCode from "react-qr-code";
-import axios from "axios";
+import Loading from "@/components/Loading";
 import { BASE_URL } from "@/utils";
 import moment from "moment";
 
 const SuccessPage = () => {
   const bookingData = useAuthStore((state: any) => state.bookingData);
-
+  if (!bookingData) {
+    return <Loading />; // or any loading state you prefer
+  }
 
   return (
     <div className="py-6 md:px-6 px-3 bg-black flex flex-col items-center justify-center">
@@ -26,8 +28,9 @@ const SuccessPage = () => {
       </div>
 
       {/* Display the booking details and barcode here */}
+
       <div className="bg-white rounded-lg p-6 mb-6">
-        <QRCode value={JSON.stringify(bookingData.parkingHistory)} />
+        <QRCode value={JSON.stringify(bookingData?.parkingHistory)} />
       </div>
 
       {/* Show booking details */}
@@ -37,31 +40,31 @@ const SuccessPage = () => {
         </h2>
         <p className="font-poopins">
           <span className="font-bold">Parking Spot:</span>{" "}
-          {bookingData.parkingHistory.parkingSpot.name}
+          {bookingData?.parkingHistory.parkingSpot.name}
         </p>
         <p className="font-poopins">
           <span className="font-bold">Check-in Date:</span>{" "}
-          {moment(bookingData.parkingHistory.checkInDate).format(
+          {moment(bookingData?.parkingHistory.checkInDate).format(
             "MMMM DD, YYYY"
           )}
         </p>
         <p className="font-poopins">
           <span className="font-bold">Check-in Time:</span>{" "}
-          {moment(bookingData.parkingHistory.checkInTime, "HH:mm").format(
+          {moment(bookingData?.parkingHistory.checkInTime, "HH:mm").format(
             "hh:mm A"
           )}
         </p>
         <p className="font-poopins">
           <span className="font-bold">License Plate:</span>{" "}
-          {bookingData.parkingHistory.licensePlate}
+          {bookingData?.parkingHistory.licensePlate}
         </p>
         <p className="font-poopins">
           <span className="font-bold">Email:</span>{" "}
-          {bookingData.parkingHistory.email}
+          {bookingData?.parkingHistory.email}
         </p>
         <p className="font-poopins">
           <span className="font-bold">User Name:</span>{" "}
-          {bookingData.parkingHistory.userName}
+          {bookingData?.parkingHistory.userName}
         </p>
       </div>
 
@@ -72,7 +75,7 @@ const SuccessPage = () => {
 
       {/* Add confetti animation */}
       <Confetti
-        width={window.innerWidth}
+        width={window.innerWidth - 100}
         height={window.innerHeight}
         recycle={false}
         numberOfPieces={300}

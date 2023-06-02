@@ -25,8 +25,9 @@ const ParkingHistory = () => {
     async function getParkingHistory() {
       try {
         const { data } = await axios.get(
-          `${BASE_URL}/api/parking-history/${userProfile.email}`
+          `api/parking-history/${userProfile.email}`
         );
+       
         setParkingHistoryData(data.parkingHistories);
       } catch (error) {
         console.log(error);

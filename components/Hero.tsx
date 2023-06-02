@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-import heroImage from "../assets/s1.png";
+import heroImage from "../assets/s1.jpg";
 import {
   FaCalendar,
   FaClock,
@@ -13,28 +13,9 @@ import useAuthStore from "@/store/authStore";
 import { IUser } from "@/types";
 import { useRouter } from "next/navigation";
 const Hero = () => {
-  const [location, setLocation] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkInTime, setCheckInTime] = useState("");
-  const [promoCode, setPromoCode] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
   const router = useRouter();
-  const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLocation(e.target.value);
-  };
-
-  const handleCheckInDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckInDate(e.target.value);
-  };
-
-  const handleCheckInTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCheckInTime(e.target.value);
-  };
-
-  const handlePromoCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPromoCode(e.target.value);
-  };
 
   const handleBooking = () => {
     // Implement the logic to handle the booking here
@@ -53,7 +34,7 @@ const Hero = () => {
           src={heroImage}
           alt="Hero Image"
           className="object-fill h-full w-full"
-          quality={90}
+          placeholder="blur"
         />
       </div>
 

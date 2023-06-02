@@ -91,7 +91,7 @@ const Hero = () => {
                   <FaMapMarkerAlt className="mb-2 text-[#FECB21]" />
                 </p>
                 <p className="text-white text-lg font-semibold">
-                  Discover Australia's Hidden Gems
+                  Discover Australia&apos;s Hidden Gems
                 </p>
               </div>
               <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">

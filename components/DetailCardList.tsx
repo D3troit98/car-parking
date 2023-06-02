@@ -7,7 +7,7 @@ import card4 from "../assets/Rectangle 11.jpg";
 
 const DetailCardList = () => {
   return (
-    <div className="py-10 bg-black px-6 md:px-12">
+    <div className="py-10 bg-black px-11 md:px-24">
       <div className="max-w-6xl flex justify-center items-center flex-col mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <FeatureCard

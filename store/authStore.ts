@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { persist, createJSONStorage } from "zustand/middleware";
 import axios from "axios";
-import { BASE_URL } from "@/utils";
+
 const useAuthStore = create(
   persist(
     (set, get) => ({
@@ -10,7 +10,7 @@ const useAuthStore = create(
       addUser: (user: any) => set({ userProfile: user }),
       removeUser: () => set({ userProfile: null }),
       fetchAllUsers: async () => {
-        const response = await axios.get(`${BASE_URL}/api/users`);
+        const response = await axios.get(`/api/users`);
         set({ allUsers: response.data });
       },
       bookingData: null,
@@ -20,6 +20,7 @@ const useAuthStore = create(
     }),
     {
       name: "auth",
+      storage: createJSONStorage(() => sessionStorage),
     }
   )
 );

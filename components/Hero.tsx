@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import parkLogo from "../public/Vector.png";
-import heroImage from "../public/herobg.png";
+
+import heroImage from "../assets/s1.png";
 import {
   FaCalendar,
   FaClock,
   FaMapMarkerAlt,
   FaExclamationCircle,
+  FaTicketAlt,
 } from "react-icons/fa";
-
+import useAuthStore from "@/store/authStore";
+import { IUser } from "@/types";
+import { useRouter } from "next/navigation";
 const Hero = () => {
   const [location, setLocation] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkInTime, setCheckInTime] = useState("");
   const [promoCode, setPromoCode] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-
+  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
+  const router = useRouter();
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocation(e.target.value);
   };
@@ -34,7 +38,12 @@ const Hero = () => {
 
   const handleBooking = () => {
     // Implement the logic to handle the booking here
-    setModalVisible(true);
+
+    if (!userProfile) {
+      setModalVisible(true);
+    } else {
+      router.push("dashboard/booking");
+    }
   };
 
   return (
@@ -43,12 +52,13 @@ const Hero = () => {
         <Image
           src={heroImage}
           alt="Hero Image"
-          className="object-cover h-full w-full"
+          className="object-fill h-full w-full"
+          quality={90}
         />
       </div>
 
       <div className="relative bg-gradient-to-b from-black to-transparent">
-        <div className="text-white pt-20 md:pt-24 flex flex-col justify-center items-center px-11 md:px-22">
+        <div className="text-white pt-20 md:pt-24 flex flex-col justify-center items-center px-11 md:px-24">
           <div className="flex flex-col">
             <p className="text-base md:text-lg font-medium leading-4 mb-1">
               Welcome to
@@ -76,75 +86,45 @@ const Hero = () => {
               Book now
             </h1>
             <div className="flex justify-center items-center gap-3 flex-wrap">
-              <div>
-                <p className="mb-2 uppercase text-[#FECB21] font-poopins font-bold text-sm md:text-base">
-                  Select location
+              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+                <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
+                  <FaMapMarkerAlt className="mb-2 text-[#FECB21]" />
                 </p>
-                <div className="relative">
-                  <input
-                    className="bg-black text-[#FECB21] rounded py-2 px-1 w-36 md:w-40 capitalize text-xs md:text-sm outline-none focus:border focus:border-[#FECB21]"
-                    placeholder="Los Angeles parking"
-                    value={location}
-                    onChange={handleLocationChange}
-                  />
-                  <div className="absolute top-1/2 transform -translate-y-1/2 right-3">
-                    <FaMapMarkerAlt className="text-[#FECB21] w-4 h-4" />
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <p className="text-white mb-2 uppercase font-poopins font-bold text-sm md:text-base">
-                  Check-in
+                <p className="text-white text-lg font-semibold">
+                  Discover Australia's Hidden Gems
                 </p>
-                <div className="flex">
-                  <div className="relative mr-2">
-                    <input
-                      className="bg-black text-white rounded py-2 px-1 w-28 md:w-32 capitalize text-xs md:text-sm outline-none focus:border focus:border-[#FECB21] font-poopins"
-                      placeholder="Date"
-                      value={checkInDate}
-                      onChange={handleCheckInDateChange}
-                    />
-                    <div className="absolute top-1/2 transform -translate-y-1/2 right-3">
-                      <FaCalendar className="text-white w-4 h-4" />
-                    </div>
-                  </div>
-                  <div className="relative">
-                    <input
-                      className="bg-black text-white rounded py-2 px-1 w-24 md:w-28 capitalize text-xs md:text-sm outline-none focus:border focus:border-[#FECB21] font-poopins"
-                      placeholder="09:00 AM"
-                      value={checkInTime}
-                      onChange={handleCheckInTimeChange}
-                    />
-                    <div className="absolute top-1/2 transform -translate-y-1/2 right-3">
-                      <FaClock className="text-white w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
               </div>
-              <div>
-                <div>
-                  <p className="text-white mb-2 uppercase font-poopins font-bold text-sm md:text-base">
-                    Promo code{" "}
-                    <span className="lowercase font-normal italic text-xs md:text-sm">
-                      (optional)
-                    </span>
-                  </p>
-                  <div className="flex justify-center items-center gap-2">
-                    <input
-                      className="bg-black text-white rounded py-2 px-1 w-32 md:w-36 capitalize text-xs md:text-sm outline-none focus:border focus:border-[#FECB21] font-poopins"
-                      placeholder=""
-                      value={promoCode}
-                      onChange={handlePromoCodeChange}
-                    />
-                    <button
-                      className="bg-[#FECB21] text-black capitalize py-2 px-3 font-bold font-poopins text-sm md:text-base"
-                      onClick={handleBooking}
-                    >
-                      Book now
-                    </button>
-                  </div>
-                </div>
-                <div></div>
+              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+                <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
+                  <FaCalendar className="mb-2 text-[#FECB21]" />
+                </p>
+                <p className="text-white text-lg font-semibold">
+                  Select your preferred date
+                </p>
+              </div>
+              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+                <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
+                  <FaClock className="mb-2 text-[#FECB21]" />
+                </p>
+                <p className="text-white text-lg font-semibold">
+                  Choose a convenient time slot
+                </p>
+              </div>
+              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+                <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
+                  <FaTicketAlt className="mb-2 text-[#FECB21]" />
+                </p>
+                <p className="text-white text-lg font-semibold">
+                  Secure your parking spot today
+                </p>
+              </div>
+              <div className="flex justify-center items-center gap-2">
+                <button
+                  className="bg-[#FECB21] text-black capitalize py-2 px-3 font-bold font-poopins text-sm md:text-base"
+                  onClick={handleBooking}
+                >
+                  Book now
+                </button>
               </div>
             </div>
           </div>
@@ -157,7 +137,7 @@ const Hero = () => {
             <div className="flex items-center justify-center mb-4">
               <FaExclamationCircle className="text-[#FECB21] w-6 h-6 mr-2" />
               <p className="text-center">
-                This feature is still being developed.
+                You need to log in or create an account
               </p>
             </div>
             <button

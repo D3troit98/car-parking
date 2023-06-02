@@ -19,9 +19,7 @@ import { IUser } from "@/types";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
 import useAuthStore from "@/store/authStore";
-const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
-  parkingSpots,
-}) => {
+const BookingPage = () => {
   const [selectedSpot, setSelectedSpot] = useState("");
   const [checkInDate, setCheckInDate] = useState("");
   const [checkInTime, setCheckInTime] = useState("");
@@ -30,12 +28,26 @@ const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
   const [parkingSpotImg, setParkingSpotImg] = useState<
     StaticImageData | string
   >(BookingSide);
-
+  const [parkingSpots, setParkingSpots] = useState<IParkingSpot[]>([]);
   const [isBookingInProgress, setIsBookingInProgress] = useState(false);
   const router = useRouter();
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
   const setBookingData = useAuthStore((state: any) => state.setBookingData);
-  console.log(userProfile);
+
+  useEffect(() => {
+    async function getParkingSpots() {
+      try {
+        const { data } = await axios.get(`/api/parking-spots`);
+
+        setParkingSpots(data?.parkingSpots);
+      } catch (error) {
+        // This will activate the closest `error.js` Error Boundary
+        console.log(error);
+        throw new Error("Failed to fetch data");
+      }
+    }
+    getParkingSpots();
+  }, []);
   useEffect(() => {
     if (selectedSpot) {
       const selectedParkingSpot = parkingSpots.find(
@@ -72,7 +84,6 @@ const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
       };
       const response = await axios.post("/api/bookings", bookingData);
       // Check if the booking was successful
-      console.log(response);
       if (response.status === 200) {
         // Simulating successful booking
         setBookingData(response.data);
@@ -82,7 +93,7 @@ const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
       } else {
         // Handle booking failure
         // Show an error message or take appropriate action
-        console.log(response.data.message);
+        // console.log(response.data.message);
         toast.error(response.data.message, {
           position: "top-center",
           autoClose: 5000,
@@ -111,6 +122,7 @@ const BookingPage: NextPage<{ parkingSpots: IParkingSpot[] }> = ({
       }); // Display a generic error message using toast notification
     }
   };
+
   if (parkingSpots?.length < 1) {
     return (
       <div className="flex items-center justify-center h-screen bg-white">

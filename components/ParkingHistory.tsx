@@ -8,7 +8,7 @@ import {
   FaTimes,
 } from "react-icons/fa";
 import useAuthStore from "@/store/authStore";
-import { BASE_URL } from "@/utils";
+
 import axios from "axios";
 import moment from "moment";
 import Link from "next/link";
@@ -25,7 +25,7 @@ const ParkingHistory = () => {
     async function getParkingHistory() {
       try {
         const { data } = await axios.get(
-          `api/parking-history/${userProfile.email}`
+          `/api/parking-history/${userProfile.email}`
         );
        
         setParkingHistoryData(data.parkingHistories);

@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const BookNow = () => {
   return (
-    <div className="bg-[#FECB21] rounded-lg shadow-lg p-6 flex items-center justify-between">
+    <div className="bg-[#FECB21] rounded-lg shadow-lg p-6 flex items-center justify-between gap-1">
       <div>
         <h2 className="text-xl font-bold font-poopins mb-4">Book Now</h2>
         <p className="text-gray-900">

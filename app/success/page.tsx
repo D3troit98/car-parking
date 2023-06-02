@@ -7,7 +7,6 @@ import { FiArrowLeft } from "react-icons/fi";
 import Confetti from "react-confetti";
 import QRCode from "react-qr-code";
 import Loading from "@/components/Loading";
-import { BASE_URL } from "@/utils";
 import moment from "moment";
 
 const SuccessPage = () => {

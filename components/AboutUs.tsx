@@ -6,7 +6,7 @@ const AboutUs = () => {
   return (
     <div
       id="aboutus"
-      className="flex flex-col items-center justify-center bg-black px-11 md:px-22 py-10"
+      className="flex flex-col items-center justify-center bg-black px-11 md:px-24 py-10"
     >
       <p className="uppercase text-white text-3xl font-bold mb-6 font-poopins">
         About Us

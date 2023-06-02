@@ -5,7 +5,7 @@ const Recommended = () => {
   return (
     <div
       id="plan"
-      className="bg-black flex justify-center items-center flex-col py-10 px-7"
+      className="bg-black flex justify-center items-center flex-col py-10 px-11 md:px-24"
     >
       <h1 className="bg-[#FECB21] text-black font-poppins py-2 px-4 font-semibold text-lg">
         Recommended

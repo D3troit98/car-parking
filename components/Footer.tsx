@@ -6,7 +6,7 @@ import parkLogo from "../public/Vector.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#1D1D1D] text-white py-8 px-4">
+    <footer className="bg-[#1D1D1D] text-white py-8 px-11 md:px-24">
       <div className="flex justify-center items-center mb-6">
         <Image
           src={parkLogo}

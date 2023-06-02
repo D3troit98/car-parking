@@ -1,16 +1,14 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { FaCheck, FaPrint } from "react-icons/fa";
-import useAuthStore from "@/store/authStore";
 import { IParkingHistoryData } from "@/types";
 import { calculateElapsedTime } from "@/utils/dateUtils";
 import axios from "axios";
 import Image from "next/image";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { BASE_URL } from "@/utils";
+import { usePathname } from "next/navigation";
+
 import Loading from "@/components/Loading";
 import moment from "moment";
-
 
 const ParkingDetail = ({ params }: { params: { id: string } }) => {
   const [parkingData, setParkingData] = useState<IParkingHistoryData>();
@@ -20,13 +18,10 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
   const pathname = usePathname();
   const id = pathname.match(/\/parking-detail\/(\w+)/)?.[1];
 
-  console.log(parkingData);
   useEffect(() => {
     const getParkingData = async () => {
       try {
-        const { data } = await axios.get(
-          `${BASE_URL}/api/parking-detail/${id}`
-        );
+        const { data } = await axios.get(`/api/parking-detail/${id}`);
         setParkingData(data.parkingHistory);
         setCheckedOff(data.parkingHistory.checkedoff);
       } catch (error) {
@@ -50,7 +45,6 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
         ...prevS,
         checkedoff: response.data?.updatedParkingHistory?.checkedoff,
       }));
-      console.log(response.data);
     } catch (error) {
       console.log(error);
     } finally {

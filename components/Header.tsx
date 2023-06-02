@@ -21,7 +21,7 @@ const Header = () => {
   }, [userProfile]);
   return (
     <div>
-      <nav className="flex border-b border-b-black px-11 md:px-22 py-6 md:py-8 justify-between items-center flex-wrap bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000]">
+      <nav className="flex border-b border-b-black px-11 md:px-24 py-6 md:py-8 justify-between items-center flex-wrap bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000]">
         <div className="flex justify-center items-center">
           <Link href="/" className="flex justify-center items-center">
             <Image

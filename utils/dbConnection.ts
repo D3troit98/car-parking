@@ -11,7 +11,7 @@ const connection: ConnectionProp = { isConnected: null };
 const connectDB: ConnectDb = async () => {
   if (connection.isConnected !== null) {
     // eslint-disable-next-line no-console
-    console.log("Database is already connected!...");
+    // console.log("Database is already connected!...");
     return;
   }
 

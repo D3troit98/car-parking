@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import useAuthStore from "@/store/authStore";
 import { BiCheckCircle } from "react-icons/bi";
@@ -8,9 +8,15 @@ import Confetti from "react-confetti";
 import QRCode from "react-qr-code";
 import Loading from "@/components/Loading";
 import moment from "moment";
-
+import { useRouter } from "next/navigation";
+import { IUser } from "@/types";
 const SuccessPage = () => {
   const bookingData = useAuthStore((state: any) => state.bookingData);
+  const router = useRouter();
+  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
+  useEffect(() => {
+    if (!userProfile) router.push("/");
+  }, [userProfile]);
   if (!bookingData) {
     return <Loading />; // or any loading state you prefer
   }

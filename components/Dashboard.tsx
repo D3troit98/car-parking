@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import BookNow from "./BookNow";
 import ReservationStatus from "./ReservationStatus";
 import ParkingLot from "./ParkingLot";
@@ -6,8 +7,15 @@ import ParkingHistory from "./ParkingHistory";
 import Image from "next/image";
 import DashImg from "../assets/dashImg.jpg";
 import { FaEnvelope } from "react-icons/fa";
-
+import useAuthStore from "@/store/authStore";
+import { useRouter } from "next/navigation";
+import { IUser } from "@/types";
 const Dashboard = () => {
+  const router = useRouter();
+  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
+  useEffect(() => {
+    if (!userProfile) router.push("/");
+  }, [userProfile]);
   return (
     <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] text-white font-poppins">
       <div className="relative bg-gradient-to-b  from-black to-transparent">

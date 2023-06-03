@@ -30,10 +30,14 @@ const BookingPage = () => {
   >(BookingSide);
   const [parkingSpots, setParkingSpots] = useState<IParkingSpot[]>([]);
   const [isBookingInProgress, setIsBookingInProgress] = useState(false);
+ 
+
+  const setBookingData = useAuthStore((state: any) => state.setBookingData);
   const router = useRouter();
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-  const setBookingData = useAuthStore((state: any) => state.setBookingData);
-
+  useEffect(() => {
+    if (!userProfile) router.push("/");
+  }, [userProfile]);
   useEffect(() => {
     async function getParkingSpots() {
       try {

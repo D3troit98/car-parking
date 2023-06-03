@@ -6,9 +6,11 @@ import { calculateElapsedTime } from "@/utils/dateUtils";
 import axios from "axios";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
+import { useRouter } from "next/router";
 import Loading from "@/components/Loading";
 import moment from "moment";
+import { IUser } from "@/types";
+import useAuthStore from "@/store/authStore";
 
 const ParkingDetail = ({ params }: { params: { id: string } }) => {
   const [parkingData, setParkingData] = useState<IParkingHistoryData>();
@@ -17,7 +19,11 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
 
   const pathname = usePathname();
   const id = pathname.match(/\/parking-detail\/(\w+)/)?.[1];
-
+  const router = useRouter();
+  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
+  useEffect(() => {
+    if (!userProfile) router.push("/");
+  }, [userProfile]);
   useEffect(() => {
     const getParkingData = async () => {
       try {

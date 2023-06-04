@@ -18,6 +18,7 @@ import { NextPage } from "next";
 import { IUser } from "@/types";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
+import NoUserProfileComponent from "./NoUserProfileComponent";
 import useAuthStore from "@/store/authStore";
 const BookingPage = () => {
   const [selectedSpot, setSelectedSpot] = useState("");
@@ -30,14 +31,11 @@ const BookingPage = () => {
   >(BookingSide);
   const [parkingSpots, setParkingSpots] = useState<IParkingSpot[]>([]);
   const [isBookingInProgress, setIsBookingInProgress] = useState(false);
- 
 
   const setBookingData = useAuthStore((state: any) => state.setBookingData);
   const router = useRouter();
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-  useEffect(() => {
-    if (!userProfile) router.push("/");
-  }, [userProfile]);
+
   useEffect(() => {
     async function getParkingSpots() {
       try {
@@ -126,7 +124,9 @@ const BookingPage = () => {
       }); // Display a generic error message using toast notification
     }
   };
-
+  if (!userProfile) {
+    return <NoUserProfileComponent />;
+  }
   if (parkingSpots?.length < 1) {
     return (
       <div className="flex items-center justify-center h-screen bg-white">

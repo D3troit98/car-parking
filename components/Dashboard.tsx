@@ -10,12 +10,13 @@ import { FaEnvelope } from "react-icons/fa";
 import useAuthStore from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { IUser } from "@/types";
+import NoUserProfileComponent from "./NoUserProfileComponent";
 const Dashboard = () => {
   const router = useRouter();
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-  useEffect(() => {
-    if (!userProfile) router.push("/");
-  }, [userProfile]);
+  if (!userProfile) {
+    return <NoUserProfileComponent />;
+  }
   return (
     <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] text-white font-poppins">
       <div className="relative bg-gradient-to-b  from-black to-transparent">

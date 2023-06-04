@@ -11,7 +11,7 @@ import Loading from "@/components/Loading";
 import moment from "moment";
 import { IUser } from "@/types";
 import useAuthStore from "@/store/authStore";
-
+import NoUserProfileComponent from "@/components/NoUserProfileComponent";
 const ParkingDetail = ({ params }: { params: { id: string } }) => {
   const [parkingData, setParkingData] = useState<IParkingHistoryData>();
   const [checkedOff, setCheckedOff] = useState(parkingData?.checkedoff);
@@ -19,11 +19,9 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
 
   const pathname = usePathname();
   const id = pathname.match(/\/parking-detail\/(\w+)/)?.[1];
-  const router = useRouter();
+
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-  useEffect(() => {
-    if (!userProfile) router.push("/");
-  }, [userProfile]);
+
   useEffect(() => {
     const getParkingData = async () => {
       try {
@@ -142,7 +140,9 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
     printWindow?.document.close();
     printWindow?.print();
   };
-
+  if (!userProfile) {
+    return <NoUserProfileComponent />;
+  }
   if (!parkingData) {
     return <Loading />; // or any loading state you prefer
   }

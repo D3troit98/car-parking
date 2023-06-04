@@ -8,15 +8,16 @@ import Confetti from "react-confetti";
 import QRCode from "react-qr-code";
 import Loading from "@/components/Loading";
 import moment from "moment";
-import { useRouter } from "next/navigation";
 import { IUser } from "@/types";
+import NoUserProfileComponent from "@/components/NoUserProfileComponent";
 const SuccessPage = () => {
   const bookingData = useAuthStore((state: any) => state.bookingData);
-  const router = useRouter();
+
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-  useEffect(() => {
-    if (!userProfile) router.push("/");
-  }, [userProfile]);
+
+  if (!userProfile) {
+    return <NoUserProfileComponent />;
+  }
   if (!bookingData) {
     return <Loading />; // or any loading state you prefer
   }

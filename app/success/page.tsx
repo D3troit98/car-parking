@@ -49,6 +49,10 @@ const SuccessPage = () => {
           {bookingData?.parkingHistory.parkingSpot.name}
         </p>
         <p className="font-poopins">
+          <span className="font-bold">Parking ID:</span>{" "}
+          {bookingData?.parkingHistory?._id}
+        </p>
+        <p className="font-poopins">
           <span className="font-bold">Check-in Date:</span>{" "}
           {moment(bookingData?.parkingHistory.checkInDate).format(
             "MMMM DD, YYYY"

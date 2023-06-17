@@ -21,7 +21,7 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
   const id = pathname.match(/\/parking-detail\/(\w+)/)?.[1];
 
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-
+  console.log(parkingData);
   useEffect(() => {
     const getParkingData = async () => {
       try {
@@ -100,6 +100,9 @@ const ParkingDetail = ({ params }: { params: { id: string } }) => {
                 parkingData?.parkingSpot.name
               }
             </p>
+            <p class="font-poopins">
+            <span class="font-bold">Parking ID:</span> ${parkingData?._id}
+          </p>
             <p class="font-poopins">
               <span class="font-bold">Check-in Date:</span> ${moment(
                 parkingData?.checkInDate

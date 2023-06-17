@@ -41,9 +41,7 @@ const ParkingHistory = () => {
     }
     setLoading(false);
   }, [userProfile]);
-  if (loading) {
-    return <Loading />; // or any loading state you prefer
-  }
+
   return (
     <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] rounded-lg p-6 shadow-md">
       <h2 className="text-2xl font-bold mb-4 font-poopins">Parking History</h2>
@@ -94,6 +92,8 @@ const ParkingHistory = () => {
                   </td>
                 </tr>
               ))
+            ) : loading ? (
+              <Loading />
             ) : (
               <tr>
                 <td colSpan={4} className="text-center">

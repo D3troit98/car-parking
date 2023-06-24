@@ -1,7 +1,17 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 import PriceCard from "./PriceCard";
 
 const Recommended = () => {
+  const router = useRouter();
+
+  const handleReservation = (plan: string) => {
+    if (plan === "Free") {
+      router.push("/dashboard/booking");
+    }
+    // Handle other plans here if needed
+  };
+
   return (
     <div
       id="plan"
@@ -14,7 +24,7 @@ const Recommended = () => {
         <PriceCard
           plantitle="Free"
           plandetails="Ideal for occasional parkers"
-          planPrice="$0.00/hour"
+          planPrice="£0.00/hour"
           reservationButton="Reserve Now"
           perks={[
             "24/7 Security",
@@ -22,32 +32,36 @@ const Recommended = () => {
             "Flexible Cancellation",
             "Electric Vehicle Charging",
             "Mobile App Integration",
+            "Up to 10 Accessible Spots",
           ]}
+          onReservation={() => handleReservation("Free")}
         />
         <PriceCard
           plantitle="Basic"
           plandetails="Perfect for frequent parkers"
-          planPrice="$9.99/hour"
-          reservationButton="Reserve Now"
+          planPrice="£9.99/hour"
+          reservationButton="Not Available"
           perks={[
             "Reserved Parking",
             "Valet Service",
             "Rewards Program",
             "Car Rental Discounts",
             "Preferred Parking Availability",
+            "Up to 300 Accessible Spots",
           ]}
         />
         <PriceCard
           plantitle="Deluxe"
           plandetails="Ultimate parking experience"
-          planPrice="$19.99/hour"
-          reservationButton="Reserve Now"
+          planPrice="£19.99/hour"
+          reservationButton="Not Available"
           perks={[
             "VIP Parking",
             "Car Wash Service",
             "Concierge Assistance",
             "Complimentary Refreshments",
             "Priority Exit",
+            "Up to 1000 Accessible Spots",
           ]}
         />
       </div>

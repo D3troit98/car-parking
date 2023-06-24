@@ -23,7 +23,9 @@ export async function POST(request: Request) {
   const existingUser = await User.findOne({ _id });
 
   if (existingUser) {
-    console.log("user exist", existingUser);
+    existingUser.loggedIn = (existingUser.loggedIn || 0) + 1;
+    await existingUser.save();
+    console.log("User exists", existingUser);
   } else {
     const newUser = new User(res);
     await newUser.save();

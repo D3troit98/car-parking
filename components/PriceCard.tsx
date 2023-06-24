@@ -6,6 +6,7 @@ interface IPriceCardProps {
   planPrice: string;
   reservationButton: string;
   perks: string[];
+  onReservation?: () => void;
 }
 
 const PriceCard = ({
@@ -14,6 +15,7 @@ const PriceCard = ({
   planPrice,
   reservationButton,
   perks,
+  onReservation,
 }: IPriceCardProps) => {
   return (
     <div className="bg-white flex flex-col justify-center items-center shadow-lg rounded-lg p-4 transform transition duration-300 hover:scale-105">
@@ -21,7 +23,13 @@ const PriceCard = ({
       <p className="text-black font-semibold text-lg font-poppins">
         {planPrice}
       </p>
-      <button className="bg-white text-black border border-[#FECB21] rounded-lg px-8 py-2 mt-4 hover:bg-[#FECB21] hover:text-black hover:outline-[#FECB21] font-poppins md:text-sm text-xs transition duration-300">
+      <button
+        className={`bg-white text-black border border-[#FECB21] rounded-lg px-8 py-2 mt-4 hover:bg-[#FECB21] hover:text-black hover:outline-[#FECB21] font-poppins md:text-sm text-xs transition duration-300 ${
+          onReservation ? "cursor-pointer" : "cursor-not-allowed"
+        }`}
+        onClick={onReservation}
+        disabled={!onReservation}
+      >
         {reservationButton}
       </button>
       <p className="text-gray-500 pt-2">{plandetails}</p>

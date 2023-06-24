@@ -1,14 +1,9 @@
-import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import aboutImage from "../assets/aboutusimg.jpg";
 
-const AboutUs = () => {
+const AboutDetail = () => {
   return (
-    <div
-      id="aboutus"
-      className="flex flex-col items-center justify-center bg-black px-11 md:px-24 py-10"
-    >
+    <div className="flex flex-col items-center justify-center bg-black px-11 md:px-24 py-10">
       <p className="uppercase text-white text-3xl font-bold mb-6 font-poopins">
         About Us
       </p>
@@ -29,15 +24,17 @@ const AboutUs = () => {
             secure payments. Enjoy the convenience and peace of mind that comes
             with August Car Park.
           </p>
-          <Link href="/about">
-            <p className="text-[#FFFFFF] hover:underline hover:text-[#FECB21]   font-poopins  text-sm  md:text-base leading-4 cursor-pointer transition-colors duration-300 italic">
-              Learn more about us
-            </p>
-          </Link>
+          <p className="pb-6">
+            We understand the challenges of finding parking in busy areas and
+            aim to simplify the process for you. Our dedicated team works
+            tirelessly to ensure that you have a seamless parking experience
+            every time. With August Car Park, you can say goodbye to the stress
+            of searching for parking and focus on what matters most to you.
+          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default AboutUs;
+export default AboutDetail;

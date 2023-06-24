@@ -33,10 +33,10 @@ const Header = () => {
             />
             <p>
               <span className="text-[#FECB21]  uppercase font-extrabold text-lg md:text-xl leading-4 font-poopins">
-                easy{" "}
+                August
               </span>{" "}
               <span className="text-[#FFFFFF] uppercase  font-extrabold text-lg md:text-xl leading-4 font-poopins">
-                park
+                Car Park
               </span>
             </p>
           </Link>

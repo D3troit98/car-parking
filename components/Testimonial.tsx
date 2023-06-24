@@ -24,9 +24,9 @@ const Testimonial = () => {
           <div className="bg-white rounded-lg shadow-lg p-8">
             <p className="mb-4 text-[#949494] font-poppins italic text-xs">
               <FaQuoteLeft className="text-[#FECB21] inline mr-2 text-xl" />
-              &ldquo;Easy Park is the best car parking reservation ticketing app
-              I have ever used. It has made parking hassle-free and convenient
-              for me. Highly recommended!&rdquo;
+              &ldquo;August Car Park is the best car parking reservation
+              ticketing app I have ever used. It has made parking hassle-free
+              and convenient for me. Highly recommended!&rdquo;
             </p>
             <hr className="border-[#FECB21]" />
             <div className="flex items-center mt-4">
@@ -38,7 +38,7 @@ const Testimonial = () => {
                 height={40}
               />
               <div>
-                <p className="text-sm font-bold text-[#6C6C6C]">Julio Doe</p>
+                <p className="text-sm font-bold text-[#6C6C6C]">Emma Olsen</p>
                 <div className="flex items-center">
                   <p className="text-[#B0B0B0] font-poopins text-sm mr-2">
                     Web Developer
@@ -51,63 +51,83 @@ const Testimonial = () => {
         </div>
         <div className="md:w-1/3 w-full flex flex-col">
           <div className="bg-white rounded-lg shadow-lg p-4 mb-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center">
               <Image
-                src="https://plus.unsplash.com/premium_photo-1671581559476-10b8a92ffb77?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                src="https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80"
                 alt="profile photo"
-                className="rounded-full mb-2 w-auto h-auto"
+                className="rounded-full mb-2 w-12 h-12 mr-4"
                 width={40}
                 height={40}
               />
-              <FaQuoteRight className="text-[#FECB21] inline mr-2 text-xl" />
+              <div className="flex-1">
+                <p className="text-sm font-bold text-[#6C6C6C]">
+                  Kristian Hansen
+                </p>
+                <p className="text-[#B0B0B0] font-poopins text-sm">
+                  Graphic Designer
+                </p>
+              </div>
+              <FaQuoteRight className="text-[#FECB21] text-xl" />
             </div>
-            <div className="flex flex-col">
-              <p className="text-sm font-bold text-[#6C6C6C]">Jane Smith</p>
-              <p className="text-[#B0B0B0] font-poopins text-sm mb-2">
-                Graphic Designer
-              </p>
-              <hr className="border bg-[#B0B0B0] flex-grow" />
-            </div>
+            <hr className="border bg-[#B0B0B0] mt-4 mb-2" />
+            <p className=" text-[#949494] font-poppins italic text-xs">
+              &ldquo;August Car Park offers a reliable and efficient parking
+              solution. It has made my daily commute hassle-free.&rdquo;
+            </p>
           </div>
+
           <div className="bg-white rounded-lg shadow-lg p-4 mb-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center">
               <Image
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                src="https://images.unsplash.com/photo-1484515991647-c5760fcecfc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1949&q=80"
                 alt="profile photo"
-                className="rounded-full mb-2 w-auto h-auto"
+                className="rounded-full mb-2 w-12 h-12 mr-4"
                 width={40}
                 height={40}
               />
-              <FaQuoteRight className="text-[#FECB21] inline mr-2 text-xl" />
+              <div className="flex-1">
+                <p className="text-sm font-bold text-[#6C6C6C]">
+                  Ole Kristoffersen
+                </p>
+                <p className="text-[#B0B0B0] font-poopins text-sm">
+                  Marketing Manager
+                </p>
+              </div>
+              <FaQuoteRight className="text-[#FECB21] text-xl" />
             </div>
-            <div className="flex flex-col">
-              <p className="text-sm font-bold text-[#6C6C6C]">
-                Michael Johnson
-              </p>
-              <p className="text-[#B0B0B0] font-poopins text-sm mb-2">
-                Marketing Manager
-              </p>
-              <hr className="border bg-[#B0B0B0] flex-grow" />
-            </div>
+            <hr className="border bg-[#B0B0B0] mt-4 mb-2" />
+            <p className=" text-[#949494] font-poppins italic text-xs">
+              &ldquo;August Car Park has exceeded our expectations. It has
+              simplified parking management and improved customer
+              satisfaction.&rdquo;
+            </p>
           </div>
+
           <div className="bg-white rounded-lg shadow-lg p-4">
-            <div className="flex justify-between items-center">
+            <div className="flex items-center">
               <Image
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=928&q=80"
                 alt="profile photo"
-                className="rounded-full mb-2 w-auto h-auto"
+                className="rounded-full mb-2 w-12 h-12 mr-4"
                 width={40}
                 height={40}
               />
-              <FaQuoteRight className="text-[#FECB21] inline mr-2 text-xl" />
+              <div className="flex-1">
+                <p className="text-sm font-bold text-[#6C6C6C]">
+                  Ida Kristiansen
+                </p>
+                <p className="text-[#B0B0B0] font-poopins text-sm">
+                  Product Manager
+                </p>
+              </div>
+              <FaQuoteRight className="text-[#FECB21] text-xl" />
             </div>
-            <div className="flex flex-col">
-              <p className="text-sm font-bold text-[#6C6C6C]">Sarah Davis</p>
-              <p className="text-[#B0B0B0] font-poopins text-sm mb-2">
-                Product Manager
-              </p>
-              <hr className="border bg-[#B0B0B0] flex-grow" />
-            </div>
+            <hr className="border bg-[#B0B0B0] mt-4 mb-2" />
+            <p className=" text-[#949494] font-poppins italic text-xs">
+              &ldquo;August Car Park has transformed our parking operations.
+              It&apos;s user-friendly and has significantly improved
+              efficiency.&rdquo;
+            </p>
           </div>
         </div>
       </div>

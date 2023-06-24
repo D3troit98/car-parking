@@ -17,10 +17,10 @@ const Footer = () => {
         />
         <p className="font-poppins">
           <span className="text-[#FECB21] uppercase font-extrabold text-lg leading-4">
-            easy
+            August
           </span>{" "}
           <span className="text-[#FFFFFF] uppercase font-extrabold text-lg leading-4">
-            park
+            Car Park
           </span>
         </p>
       </div>

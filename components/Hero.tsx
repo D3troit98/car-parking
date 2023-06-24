@@ -16,6 +16,12 @@ const Hero = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
   const router = useRouter();
+  const [bookingData, setBookingData] = useState({
+    location: "DISCOVER NORWICH'S CITIES",
+    date: "Select your preferred date",
+    time: "Choose a convenient time slot",
+    spot: "Secure your parking spot today",
+  });
 
   const handleBooking = () => {
     // Implement the logic to handle the booking here
@@ -25,6 +31,10 @@ const Hero = () => {
     } else {
       router.push("dashboard/booking");
     }
+  };
+
+  const handleAdminLogin = () => {
+    router.push("/admin"); // Replace "/admin" with the actual admin page URL
   };
 
   return (
@@ -46,19 +56,17 @@ const Hero = () => {
             </p>
             <p>
               <span className="text-[#FECB21] uppercase font-extrabold text-4xl md:text-5xl leading-10 font-poopins">
-                easy{" "}
+                August{" "}
               </span>
               <span className="text-[#FFFFFF] uppercase font-extrabold text-4xl leading-10 md:text-5xl font-poopins">
-                park
+                Car Park
               </span>
             </p>
             <p className="md:w-96 text-base mt-2 py-4">
-              Easy Park is your reliable car parking reservation ticketing app.
-              Say goodbye to the hassle of searching for parking spots. With
-              Easy Park, you can easily find and reserve a parking space in
-              advance, ensuring a stress-free parking experience. Whether
-              you&apos;re running errands, going to work, or planning a day out,
-              Easy Park has got you covered.
+              August Car Park is your reliable car parking reservation ticketing
+              app. Say goodbye to the hassle of searching for parking spots.
+              With August Car Park, you can easily find and reserve a parking
+              space in advance, ensuring a stress-free parking experience.
             </p>
           </div>
 
@@ -67,36 +75,36 @@ const Hero = () => {
               Book now
             </h1>
             <div className="flex justify-center items-center gap-3 flex-wrap">
-              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+              <div className="mb-4 md:flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md hidden ">
                 <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
                   <FaMapMarkerAlt className="mb-2 text-[#FECB21]" />
                 </p>
                 <p className="text-white text-lg font-semibold">
-                  Discover Australia&apos;s Hidden Gems
+                  {bookingData.location}
                 </p>
               </div>
-              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+              <div className="mb-4 md:flex hidden flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
                 <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
                   <FaCalendar className="mb-2 text-[#FECB21]" />
                 </p>
                 <p className="text-white text-lg font-semibold">
-                  Select your preferred date
+                  {bookingData.date}
                 </p>
               </div>
-              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+              <div className="mb-4 md:flex hidden flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
                 <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
                   <FaClock className="mb-2 text-[#FECB21]" />
                 </p>
                 <p className="text-white text-lg font-semibold">
-                  Choose a convenient time slot
+                  {bookingData.time}
                 </p>
               </div>
-              <div className="mb-4 flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
+              <div className="mb-4 md:flex hidden flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
                 <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
                   <FaTicketAlt className="mb-2 text-[#FECB21]" />
                 </p>
                 <p className="text-white text-lg font-semibold">
-                  Secure your parking spot today
+                  {bookingData.spot}
                 </p>
               </div>
               <div className="flex justify-center items-center gap-2">
@@ -105,6 +113,12 @@ const Hero = () => {
                   onClick={handleBooking}
                 >
                   Book now
+                </button>
+                <button
+                  className="bg-[#FECB21] text-black capitalize py-2 px-3 font-bold font-poopins text-sm md:text-base"
+                  onClick={handleAdminLogin}
+                >
+                  Admin Login
                 </button>
               </div>
             </div>

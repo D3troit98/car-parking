@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String, required: true },
     _id: { type: String, required: true },
     _type: { type: String, required: true },
+    loggedIn: { type: Number, default: 1 },
   },
   {
     // add createdAt and updatedAt timestamps

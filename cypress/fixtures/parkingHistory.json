@@ -1,0 +1,17 @@
+{
+    "parkingHistories": [
+      {
+        "id": "1",
+        "date": "2023-07-05",
+        "time": "10:00 AM",
+        "duration": "2 hours"
+      },
+      {
+        "id": "2",
+        "date": "2023-07-06",
+        "time": "11:30 AM",
+        "duration": "1 hour"
+      }
+    ]
+  }
+  

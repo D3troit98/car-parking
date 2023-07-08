@@ -15,35 +15,12 @@ import Link from "next/link";
 import { IUser } from "@/types";
 import { IParkingHistoryData } from "@/types";
 import Loading from "./Loading";
-const ParkingHistory = () => {
-  const [parkingHistoryData, setParkingHistoryData] = useState<
-    IParkingHistoryData[] | []
-  >();
-  const [loading, setLoading] = useState(true);
-  const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
-  useEffect(() => {
-    async function getParkingHistory() {
-      try {
-        const { data } = await axios.get(
-          `/api/parking-history/${userProfile.email}`
-        );
-       
-        setParkingHistoryData(data.parkingHistories);
-      } catch (error) {
-        console.log(error);
-        throw new Error("Failed to fetch data");
-      }
-    }
-
-    if (userProfile) {
-      setLoading(true);
-      getParkingHistory();
-    }
-    setLoading(false);
-  }, [userProfile]);
+const ParkingHistory = ({parkingHistoryData}:{parkingHistoryData:IParkingHistoryData[]}) => {
+ 
+  const [loading, setLoading] = useState(false);
 
   return (
-    <div className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] rounded-lg p-6 shadow-md">
+    <div data-cy="parking-history" className="bg-gradient-to-br from-black via-[#1D1D1D] to-[#000000] rounded-lg p-6 shadow-md">
       <h2 className="text-2xl font-bold mb-4 font-poopins">Parking History</h2>
       <div className="overflow-x-auto">
         <table className="w-full table-auto">
@@ -111,7 +88,7 @@ const ParkingHistory = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-end mt-4">
+      {/* <div className="flex justify-end mt-4">
         <button className="flex items-center px-4 py-2 bg-yellow-500 text-white font-semibold rounded-md">
           <FaChevronLeft className="mr-1" />
         </button>
@@ -124,7 +101,7 @@ const ParkingHistory = () => {
         <button className="flex items-center px-4 py-2 bg-yellow-500 text-white font-semibold rounded-md ml-2">
           <FaChevronRight className="ml-1" />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

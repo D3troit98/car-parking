@@ -9,13 +9,13 @@ const connection: ConnectionProp = { isConnected: null };
 
 // Connect to Databse
 const connectDB: ConnectDb = async () => {
-  if (connection.isConnected !== null) {
+  if (connection?.isConnected !== null) {
     // eslint-disable-next-line no-console
     // console.log("Database is already connected!...");
     return;
   }
 
-  if (mongoose.connections.length > 0) {
+  if (mongoose?.connections?.length > 0) {
     // @ts-expect-error
     // eslint-disable-next-line no-underscore-dangle
     connection.isConnected = mongoose.connections[0]._readyState;
@@ -32,6 +32,7 @@ const connectDB: ConnectDb = async () => {
     // useNewUrlParser: true,  /* Not-supported / deprecated */
     // useUnifiedTopology: true, /* Not-supported / deprecated */
     autoIndex: true,
+    serverSelectionTimeoutMS: 30000, // Timeout value in milliseconds
     // useCreateIndex: true,      /* Not-supported / deprecated */
     // useFindAndModify: false,   /* Not-supported / deprecated */
   };
@@ -43,6 +44,7 @@ const connectDB: ConnectDb = async () => {
     // @ts-expect-error
     // eslint-disable-next-line no-underscore-dangle
     connection.isConnected = db.connection._readyState;
+    console.log("connected")
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log("Error Connecting to DB!: ", e);

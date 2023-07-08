@@ -3,7 +3,7 @@ import aboutImage from "../assets/aboutusimg.jpg";
 
 const AboutDetail = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-black px-11 md:px-24 py-10">
+    <div data-cy="about-detail" className="flex flex-col items-center justify-center bg-black px-11 md:px-24 py-10">
       <p className="uppercase text-white text-3xl font-bold mb-6 font-poopins">
         About Us
       </p>

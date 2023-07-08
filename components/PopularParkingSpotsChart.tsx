@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,16 +11,12 @@ import {
 import { Bar } from "react-chartjs-2";
 import { motion } from "framer-motion";
 
-interface PopularSpotsData {
-  parkingSpots: string[];
-  counts: number[];
-}
 
-const PopularParkingSpotsChart = () => {
-  const [popularSpotsData, setPopularSpotsData] = useState<PopularSpotsData>({
-    parkingSpots: [],
-    counts: [],
-  });
+const PopularParkingSpotsChart = ({popularParkingSpots}:any) => {
+  // const [popularSpotsData, setPopularSpotsData] = useState<PopularSpotsData>({
+  //   parkingSpots: [],
+  //   counts: [],
+  // });
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -31,42 +26,42 @@ const PopularParkingSpotsChart = () => {
     Legend
   );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<PopularSpotsData>(
-          "/api/popular-parking-spots"
-        );
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get<PopularSpotsData>(
+  //         "/api/popular-parking-spots"
+  //       );
 
-        setPopularSpotsData(response.data);
-      } catch (error) {
-        console.error("Error fetching popular parking spots data:", error);
-        setPopularSpotsData({
-          parkingSpots: [],
-          counts: [],
-        }); // Set empty data in case of an error
-      }
-    };
+  //       setPopularSpotsData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching popular parking spots data:", error);
+  //       setPopularSpotsData({
+  //         parkingSpots: [],
+  //         counts: [],
+  //       }); // Set empty data in case of an error
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
-  console.log(popularSpotsData.parkingSpots);
+  //   fetchData();
+  // }, []);
+
   return (
-    <div className="w-full">
+    <div data-cy="popular-parking-spots-chart" className="w-full">
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-2xl font-bold mb-4">Popular Parking Spots</h2>
-        {popularSpotsData.parkingSpots.length > 0 ? (
+        {popularParkingSpots?.parkingSpots.length > 0 ? (
           <Bar
             data={{
-              labels: popularSpotsData.parkingSpots,
+              labels: popularParkingSpots.parkingSpots,
               datasets: [
                 {
                   label: "Check-in Count",
-                  data: popularSpotsData.counts,
+                  data: popularParkingSpots.counts,
                   backgroundColor: "#FECB21",
                 },
               ],

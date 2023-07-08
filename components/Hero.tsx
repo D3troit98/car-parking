@@ -29,7 +29,7 @@ const Hero = () => {
     if (!userProfile) {
       setModalVisible(true);
     } else {
-      router.push("dashboard/booking");
+      router.push("/booking");
     }
   };
 
@@ -70,11 +70,11 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col justify-center items-center bg-white bg-opacity-10 rounded-lg mt-10 py-6 px-6">
+          <div className="flex flex-col justify-center items-center bg-white bg-opacity-10 rounded-lg mt-10 py-6 px-6 w-full">
             <h1 className="md:text-3xl text-2xl font-bold mb-4 capitalize font-poopins text-[#FECB21]">
               Book now
             </h1>
-            <div className="flex justify-center items-center gap-3 flex-wrap">
+            <div className="flex flex-col justify-center items-center gap-3 flex-wrap">
               <div className="mb-4 md:flex flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md hidden ">
                 <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
                   <FaMapMarkerAlt className="mb-2 text-[#FECB21]" />
@@ -83,30 +83,7 @@ const Hero = () => {
                   {bookingData.location}
                 </p>
               </div>
-              <div className="mb-4 md:flex hidden flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
-                <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
-                  <FaCalendar className="mb-2 text-[#FECB21]" />
-                </p>
-                <p className="text-white text-lg font-semibold">
-                  {bookingData.date}
-                </p>
-              </div>
-              <div className="mb-4 md:flex hidden flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
-                <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
-                  <FaClock className="mb-2 text-[#FECB21]" />
-                </p>
-                <p className="text-white text-lg font-semibold">
-                  {bookingData.time}
-                </p>
-              </div>
-              <div className="mb-4 md:flex hidden flex-col justify-center items-center bg-black bg-opacity-10 rounded-lg p-4 shadow-md">
-                <p className="text-white uppercase font-poopins font-bold text-sm md:text-base">
-                  <FaTicketAlt className="mb-2 text-[#FECB21]" />
-                </p>
-                <p className="text-white text-lg font-semibold">
-                  {bookingData.spot}
-                </p>
-              </div>
+              
               <div className="flex justify-center items-center gap-2">
                 <button
                   className="bg-[#FECB21] text-black capitalize py-2 px-3 font-bold font-poopins text-sm md:text-base"

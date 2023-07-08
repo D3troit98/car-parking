@@ -1,9 +1,4 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-  // webpack(config) {
-  //   config.experiments = { ...config.experiments, topLevelAwait: true };
-  //   return config;
-  // },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -13,9 +8,16 @@ const nextConfig = {
       "images.unsplash.com",
       "lh3.googleusercontent.com",
       "plus.unsplash.com",
+      "gravatar.com"
     ],
   },
+  serverRuntimeConfig: {
+    apiResponseSizeLimit: '8mb',
+    apiPayLoadLimit:'50mb'
+  },
+ publicRuntimeConfig: {
+    apiResponseSizeLimit: '8mb',
+  }, 
 };
 
 module.exports = nextConfig;
-  

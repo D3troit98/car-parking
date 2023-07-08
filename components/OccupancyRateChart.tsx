@@ -1,33 +1,31 @@
-"use client";
-import { useEffect, useState } from "react";
-import axios from "axios";
+
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { motion } from "framer-motion";
 
-const OccupancyRateChart = () => {
-  const [occupancyData, setOccupancyData] = useState([]);
-  const [labels, setLabels] = useState([]);
+const OccupancyRateChart = ({occupancyData, labels}:any) => {
+  // const [occupancyData, setOccupancyData] = useState([]);
+  // const [labels, setLabels] = useState([]);
   ChartJS.register(ArcElement, Tooltip, Legend);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/occupancy");
-        const { occupancyData, labels } = response.data;
-        setOccupancyData(occupancyData);
-        setLabels(labels);
-      } catch (error) {
-        console.error("Error fetching occupancy data:", error);
-        setOccupancyData([]); // Set empty data in case of an error
-        setLabels([]);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("/api/occupancy");
+  //       const { occupancyData, labels } = response.data;
+  //       setOccupancyData(occupancyData);
+  //       setLabels(labels);
+  //     } catch (error) {
+  //       console.error("Error fetching occupancy data:", error);
+  //       setOccupancyData([]); // Set empty data in case of an error
+  //       setLabels([]);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
-
+  //   fetchData();
+  // }, []);
+console.log(occupancyData, labels)
   return (
-    <div className="w-full md:w-1/2">
+    <div data-cy="occupancy-rate-chart" className="w-full md:w-1/2">
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -36,7 +34,7 @@ const OccupancyRateChart = () => {
         <h2 className="text-2xl font-bold mb-4 text-[#FECB21] text-center">
           Occupancy Rate
         </h2>
-        {occupancyData.length > 0 && labels.length > 0 ? (
+        {occupancyData?.length > 0 && labels?.length > 0 ? (
           <Pie
             data={{
               labels: labels,

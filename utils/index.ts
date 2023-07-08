@@ -1,6 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 
 export const createOrGetUser = async (response: any, addUser: any) => {
@@ -13,10 +14,10 @@ export const createOrGetUser = async (response: any, addUser: any) => {
     _type: "user",
     userName: name,
     image: picture,
-    email: email,
+    email: email.toLocaleLowerCase(),
   };
 
   addUser(user);
 
-  await axios.post(`/api/users`, user);
+  await axios.post(`${BASE_URL}/api/users`, user);
 };

@@ -7,8 +7,11 @@ const useAuthStore = create(
     (set, get) => ({
       userProfile: null,
       allUsers: [],
+      adminUser:null,
+      addAdminUser:(user:any)  => set({ adminUser: user }),
       addUser: (user: any) => set({ userProfile: user }),
       removeUser: () => set({ userProfile: null }),
+      removeAdminUser:()=>set({adminUser:null}),
       fetchAllUsers: async () => {
         const response = await axios.get(`/api/users`);
         set({ allUsers: response.data });

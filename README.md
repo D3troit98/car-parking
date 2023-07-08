@@ -1,65 +1,52 @@
-# August Car Park
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-August Car Park is a web application that enables drivers to book, reserve, and obtain tickets for accessing car parking spaces in buildings or large areas. It also provides a feature for drivers to view their parking status within the car park. The application aims to reduce congestion and collisions between vehicles while enhancing the ease and security of parking.
+## System Requirements
 
-## Features
+Make sure you have the following software installed on your system:
 
-- **Booking and Reservation:** Users can easily book and reserve parking spaces through the application, ensuring their spot is secured in advance.
+- [Node.js](https://nodejs.org) (>=18.0.0)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) or [pnpm](https://pnpm.io/)
+- Chrome Browser
+- MongoDB(for Admin User)
 
-- **Ticketing System:** Upon successful booking, users receive digital tickets that grant them access to the car park.
-
-- **Parking Status:** The application allows users to view the availability of parking spaces and their current status, providing real-time information.
-
-- **Congestion Reduction:** By streamlining the booking process, August Car Park helps reduce congestion in car parks and improves traffic flow.
-
-- **Collision Prevention:** Clear parking space allocation and management minimize the risk of collisions between vehicles, ensuring a safer parking experience.
-
-## Technologies Used
-
-The project utilizes the following technologies:
-
-- **Next.js:** A React framework for building server-side rendered and static web applications.
-
-- **MongoDB:** A NoSQL database used for storing and managing car park, user, and booking information.
-
-- **Python:** Used for backend scripting, data analysis, and visualization tasks.
-
+## Python Dependency
+- dotenv import load_dotenv
+- matplotlib
+- MongoClient
+- pandas 
 ## Getting Started
 
-To run the August Car Park application locally, follow these steps:
+First, run the development server:
 
-1. Clone the repository to your local machine.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-2. Install the project dependencies by running the following command:
-   ```
-   npm install
-   ```
-3.  `npm run dev`
-4. Open http://localhost:3000 in your browser to access the August Car Park application. 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Getting Started
-The application can be deployed using the Vercel platform. Follow these steps:
+You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
 
-1. Sign up or log in to your Vercel account.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-2. Import the August Car Park repository and configure the deployment settings.
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-3. Vercel will automatically deploy the application and provide you with a unique URL.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-4. Visit the provided URL to access the deployed August Car Park application.
+## Learn More
 
-For more details on deployment, refer to the [Next.js deployment documentation](https://nextjs.org/docs/deployment)
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-## Contributing
-Contributions to the August Car Park project are welcome! If you encounter any issues or have suggestions for improvements, feel free to open an issue or submit a pull request on the project's GitHub repository.
-
-## License
-
-The August Car Park project is licensed under the [MIT License](LICENSE).
-
-
-
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

@@ -1,6 +1,18 @@
-import mongoose from "mongoose";
+import mongoose, { Model, Document } from 'mongoose';
 
-const ParkingSpotSchema = new mongoose.Schema(
+interface ParkingSpotAttributes {
+  name: string;
+  available: boolean;
+  image: string;
+  location: string;
+  price: number;
+}
+
+interface ParkingSpotDocument extends Document, ParkingSpotAttributes {}
+
+interface ParkingSpotModel extends Model<ParkingSpotDocument> {}
+
+const parkingSpotSchema = new mongoose.Schema<ParkingSpotDocument, ParkingSpotModel>(
   {
     name: { type: String, required: true },
     available: { type: Boolean, required: true },
@@ -14,7 +26,7 @@ const ParkingSpotSchema = new mongoose.Schema(
 );
 
 const ParkingSpot =
-  mongoose.models.ParkingSpot ||
-  mongoose.model("parkingSpot", ParkingSpotSchema);
+  (mongoose.models.ParkingSpot as ParkingSpotModel) ||
+  mongoose.model<ParkingSpotDocument, ParkingSpotModel>('ParkingSpot', parkingSpotSchema);
 
 export default ParkingSpot;

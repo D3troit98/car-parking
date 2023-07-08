@@ -8,6 +8,9 @@ const UserSchema = new mongoose.Schema(
     _id: { type: String, required: true },
     _type: { type: String, required: true },
     loggedIn: { type: Number, default: 1 },
+    password: { type: String },
+    resetToken: { type: String },
+    resetTokenExpiry: { type: Date },
   },
   {
     // add createdAt and updatedAt timestamps

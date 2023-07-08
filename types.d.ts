@@ -36,3 +36,25 @@ export interface IParkingHistoryData {
   };
   userName: string;
 }
+
+
+export interface PopularSpotsData {
+  parkingSpots: string[];
+  counts: number[];
+}
+
+interface IParkingLot {
+  name: string;
+  location: string;
+  available: boolean;
+  image: string;
+  price: number;
+  _id: string;
+  updatedAt: string;
+}
+
+export type DashBoardPageProp = {
+  hasReservation : boolean,
+  parkingSpot : IParkingSpot |null,
+  parkingHistoryData:IParkingHistoryData[]
+}

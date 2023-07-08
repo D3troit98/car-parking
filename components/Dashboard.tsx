@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 import BookNow from "./BookNow";
 import ReservationStatus from "./ReservationStatus";
 import ParkingLot from "./ParkingLot";
@@ -11,7 +10,10 @@ import useAuthStore from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import { IUser } from "@/types";
 import NoUserProfileComponent from "./NoUserProfileComponent";
-const Dashboard = () => {
+import { DashBoardPageProp } from "@/types";
+
+
+const Dashboard = ({hasReservation,parkingSpot, parkingHistoryData}:DashBoardPageProp) => {
   const router = useRouter();
   const userProfile: IUser = useAuthStore((state: any) => state.userProfile);
   if (!userProfile) {
@@ -37,16 +39,18 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <main className="py-8 px-8">
+      <main data-cy="dashboard-component" className="py-8 px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <BookNow />
-          <ReservationStatus />
-          <ParkingLot />
+          <ReservationStatus hasReservation={hasReservation} />
+          <ParkingLot  parkingSpot={parkingSpot} />
         </div>
-        <ParkingHistory />
+        <ParkingHistory parkingHistoryData={parkingHistoryData} />
       </main>
     </div>
   );
 };
 
+
 export default Dashboard;
+

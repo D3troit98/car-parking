@@ -1,31 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { FaCar, FaMapMarkerAlt, FaClock } from "react-icons/fa";
 import axios from "axios";
-interface IParkingLot {
-  name: string;
-  location: string;
-  available: boolean;
-  image: string;
-  price: number;
-  _id: string;
-  updatedAt: string;
-}
-const ParkingLot = () => {
-  const [parkingSpot, setParkingSpot] = useState<IParkingLot | null>(null);
-  useEffect(() => {
-    const fetchParkingSpot = async () => {
-      try {
-        const { data } = await axios.get("/api/availableParkingSpot");
-        console.log(data);
-        setParkingSpot(data.parkingSpot);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchParkingSpot();
-  }, []);
+import { IParkingSpot } from "@/types";
+
+const ParkingLot = ({parkingSpot}:{parkingSpot:IParkingSpot|null}) => {
+  
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center space-y-4">
+    <div data-cy="parking-spot" className="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center space-y-4">
       <FaCar className="text-[#FECB21] text-4xl" />
       {parkingSpot ? (
         <>

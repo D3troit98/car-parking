@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,11 +11,11 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-const ParkingHistoryTimeline = () => {
-  const [timelineData, setTimelineData] = useState({
-    checkInDates: [],
-    checkInTimes: [],
-  });
+const ParkingHistoryTimeline = ({checkInDates, checkInTimes}:any) => {
+  // const [timelineData, setTimelineData] = useState({
+  //   checkInDates: [],
+  //   checkInTimes: [],
+  // });
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -26,33 +25,19 @@ const ParkingHistoryTimeline = () => {
     Tooltip,
     Legend
   );
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/parking-history-chart");
-        const { checkInDates, checkInTimes } = response.data;
-        setTimelineData({ checkInDates, checkInTimes });
-      } catch (error) {
-        console.error("Error fetching parking history data:", error);
-        setTimelineData({ checkInDates: [], checkInTimes: [] }); // Set empty data in case of an error
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
-    <div className="w-full md:w-1/2">
+    <div className="w-full md:w-1/2" data-cy="parking-history-timeline">
       <div className="">
         <h2 className="text-2xl font-bold mb-4">Parking History Timeline</h2>
-        {timelineData.checkInDates.length > 0 ? (
+        {checkInDates?.length > 0 && checkInTimes?.length ? (
           <Line
             data={{
-              labels: timelineData.checkInDates,
+              labels:checkInDates,
               datasets: [
                 {
                   label: "Check-in Times",
-                  data: timelineData.checkInTimes,
+                  data: checkInTimes,
                   borderColor: "rgb(255, 99, 132)",
                   backgroundColor: "rgba(255, 99, 132, 0.5)",
                 },
